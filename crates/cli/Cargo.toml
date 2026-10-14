@@ -1,0 +1,18 @@
+[package]
+name = "cutline-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Cutline CLI for rendering JSON timelines"
+
+[[bin]]
+name = "cutline"
+path = "src/main.rs"
+
+[dependencies]
+cutline-schema = { workspace = true }
+cutline-compositor = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde_json = { workspace = true }
