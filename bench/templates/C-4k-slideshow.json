@@ -1,0 +1,743 @@
+{
+  "schema_version": "1.0",
+  "outputs": [
+    {
+      "id": "slideshow_4k",
+      "aspect": "16:9",
+      "resolution": "3840x2160",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "slide_01": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_01.jpg",
+      "duration": 2.5
+    },
+    "slide_02": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_02.jpg",
+      "duration": 2.5
+    },
+    "slide_03": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_03.jpg",
+      "duration": 2.5
+    },
+    "slide_04": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_04.jpg",
+      "duration": 2.5
+    },
+    "slide_05": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_05.jpg",
+      "duration": 2.5
+    },
+    "slide_06": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_06.jpg",
+      "duration": 2.5
+    },
+    "slide_07": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_07.jpg",
+      "duration": 2.5
+    },
+    "slide_08": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_08.jpg",
+      "duration": 2.5
+    },
+    "slide_09": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_09.jpg",
+      "duration": 2.5
+    },
+    "slide_10": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_10.jpg",
+      "duration": 2.5
+    },
+    "slide_11": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_11.jpg",
+      "duration": 2.5
+    },
+    "slide_12": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_12.jpg",
+      "duration": 2.5
+    },
+    "slide_13": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_13.jpg",
+      "duration": 2.5
+    },
+    "slide_14": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_14.jpg",
+      "duration": 2.5
+    },
+    "slide_15": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_15.jpg",
+      "duration": 2.5
+    },
+    "slide_16": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_16.jpg",
+      "duration": 2.5
+    },
+    "slide_17": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_17.jpg",
+      "duration": 2.5
+    },
+    "slide_18": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_18.jpg",
+      "duration": 2.5
+    },
+    "slide_19": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_19.jpg",
+      "duration": 2.5
+    },
+    "slide_20": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_20.jpg",
+      "duration": 2.5
+    },
+    "slide_21": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_21.jpg",
+      "duration": 2.5
+    },
+    "slide_22": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_22.jpg",
+      "duration": 2.5
+    },
+    "slide_23": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_23.jpg",
+      "duration": 2.5
+    },
+    "slide_24": {
+      "type": "image",
+      "src": "bench/assets/slides/slide_24.jpg",
+      "duration": 2.5
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "clip_01",
+          "asset": "slide_01",
+          "start": 0.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_02",
+          "asset": "slide_02",
+          "start": 2.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_03",
+          "asset": "slide_03",
+          "start": 5.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_04",
+          "asset": "slide_04",
+          "start": 7.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_05",
+          "asset": "slide_05",
+          "start": 10.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_06",
+          "asset": "slide_06",
+          "start": 12.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_07",
+          "asset": "slide_07",
+          "start": 15.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_08",
+          "asset": "slide_08",
+          "start": 17.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_09",
+          "asset": "slide_09",
+          "start": 20.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_10",
+          "asset": "slide_10",
+          "start": 22.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_11",
+          "asset": "slide_11",
+          "start": 25.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_12",
+          "asset": "slide_12",
+          "start": 27.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_13",
+          "asset": "slide_13",
+          "start": 30.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_14",
+          "asset": "slide_14",
+          "start": 32.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_15",
+          "asset": "slide_15",
+          "start": 35.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_16",
+          "asset": "slide_16",
+          "start": 37.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_17",
+          "asset": "slide_17",
+          "start": 40.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_18",
+          "asset": "slide_18",
+          "start": 42.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_19",
+          "asset": "slide_19",
+          "start": 45.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_20",
+          "asset": "slide_20",
+          "start": 47.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_21",
+          "asset": "slide_21",
+          "start": 50.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_22",
+          "asset": "slide_22",
+          "start": 52.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_23",
+          "asset": "slide_23",
+          "start": 55.0,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        },
+        {
+          "id": "clip_24",
+          "asset": "slide_24",
+          "start": 57.5,
+          "duration": 2.5,
+          "fit": "cover",
+          "keyframes": {
+            "scale": [
+              [
+                0.0,
+                1.0,
+                "ease_out"
+              ],
+              [
+                2.5,
+                1.15,
+                "linear"
+              ]
+            ]
+          },
+          "transition_in": {
+            "type": "cross_dissolve",
+            "duration": 0.5
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "outputs": [
+    {
+      "id": "main",
+      "aspect": "9:16",
+      "resolution": "1080x1920",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "matte": {
+      "type": "video",
+      "src": "demo:color_matte",
+      "duration": 10.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c_matte",
+          "asset": "matte",
+          "start": 0,
+          "duration": 10.0
+        }
+      ]
+    },
+    {
+      "id": "t1",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "c_text",
+          "start": 0,
+          "duration": 10.0,
+          "text": {
+            "text": "Cutline Engine Baseline Probe",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

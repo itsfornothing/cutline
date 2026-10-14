@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "outputs": [
+    {
+      "id": "tt",
+      "aspect": "9:16",
+      "resolution": "1080x1920",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264",
+      "reframe": "smart"
+    },
+    {
+      "id": "sq",
+      "aspect": "1:1",
+      "resolution": "1080x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264",
+      "reframe": "smart"
+    },
+    {
+      "id": "yt",
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264",
+      "reframe": "smart"
+    }
+  ],
+  "assets": {
+    "bg": {
+      "type": "video",
+      "src": "bench/assets/bg_1080p30.mp4",
+      "loop": true,
+      "duration": 60.0
+    },
+    "vo": {
+      "type": "audio",
+      "src": "bench/assets/voice_60s.mp3",
+      "duration": 60.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "clip_bg",
+          "asset": "bg",
+          "start": 0,
+          "duration": 60.0,
+          "fit": "cover"
+        }
+      ]
+    },
+    {
+      "id": "a1",
+      "kind": "audio",
+      "clips": [
+        {
+          "id": "clip_vo",
+          "asset": "vo",
+          "start": 0,
+          "duration": 60.0
+        }
+      ],
+      "mix": {
+        "role": "voice"
+      }
+    },
+    {
+      "id": "c1",
+      "kind": "captions",
+      "source": {
+        "align_audio": "vo",
+        "language": "auto"
+      },
+      "style": {
+        "preset": "karaoke",
+        "font": "Inter",
+        "highlight": "#FFB000",
+        "safe_zone": "tiktok",
+        "font_size": 36.0,
+        "color": "#FFFFFF"
+      }
+    }
+  ],
+  "audio": {
+    "normalize_lufs": -14.0,
+    "duck": {
+      "under": "voice",
+      "amount_db": -12.0
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Ignore generated binary assets; tracked via bench/assets.lock
+assets/*.mp4
+assets/*.mp3
+assets/slides/
+!assets/LICENSES.md

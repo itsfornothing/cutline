@@ -1,0 +1,1596 @@
+{
+  "schema_version": "1.0",
+  "outputs": [
+    {
+      "id": "text_60fps",
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 60,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "matte": {
+      "type": "video",
+      "src": "demo:color_matte",
+      "duration": 60.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "bg_track",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "bg_clip",
+          "asset": "matte",
+          "start": 0.0,
+          "duration": 60.0
+        }
+      ]
+    },
+    {
+      "id": "text_track",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "text_clip_00",
+          "start": 0.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #00 @ 60 FPS",
+            "font": "Inter",
+            "size": 32.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_01",
+          "start": 2.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #01 @ 60 FPS",
+            "font": "Inter",
+            "size": 36.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_02",
+          "start": 5.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #02 @ 60 FPS",
+            "font": "Inter",
+            "size": 40.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_03",
+          "start": 7.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #03 @ 60 FPS",
+            "font": "Inter",
+            "size": 44.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_04",
+          "start": 10.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #04 @ 60 FPS",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_05",
+          "start": 12.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #05 @ 60 FPS",
+            "font": "Inter",
+            "size": 52.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_06",
+          "start": 15.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #06 @ 60 FPS",
+            "font": "Inter",
+            "size": 56.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_07",
+          "start": 17.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #07 @ 60 FPS",
+            "font": "Inter",
+            "size": 60.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_08",
+          "start": 20.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #08 @ 60 FPS",
+            "font": "Inter",
+            "size": 32.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_09",
+          "start": 22.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #09 @ 60 FPS",
+            "font": "Inter",
+            "size": 36.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_10",
+          "start": 25.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #10 @ 60 FPS",
+            "font": "Inter",
+            "size": 40.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_11",
+          "start": 27.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #11 @ 60 FPS",
+            "font": "Inter",
+            "size": 44.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_12",
+          "start": 30.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #12 @ 60 FPS",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_13",
+          "start": 32.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #13 @ 60 FPS",
+            "font": "Inter",
+            "size": 52.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_14",
+          "start": 35.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #14 @ 60 FPS",
+            "font": "Inter",
+            "size": 56.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_15",
+          "start": 37.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #15 @ 60 FPS",
+            "font": "Inter",
+            "size": 60.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_16",
+          "start": 40.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #16 @ 60 FPS",
+            "font": "Inter",
+            "size": 32.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_17",
+          "start": 42.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #17 @ 60 FPS",
+            "font": "Inter",
+            "size": 36.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_18",
+          "start": 45.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #18 @ 60 FPS",
+            "font": "Inter",
+            "size": 40.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_19",
+          "start": 47.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #19 @ 60 FPS",
+            "font": "Inter",
+            "size": 44.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_20",
+          "start": 0.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #20 @ 60 FPS",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_21",
+          "start": 2.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #21 @ 60 FPS",
+            "font": "Inter",
+            "size": 52.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_22",
+          "start": 5.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #22 @ 60 FPS",
+            "font": "Inter",
+            "size": 56.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_23",
+          "start": 7.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #23 @ 60 FPS",
+            "font": "Inter",
+            "size": 60.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_24",
+          "start": 10.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #24 @ 60 FPS",
+            "font": "Inter",
+            "size": 32.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_25",
+          "start": 12.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #25 @ 60 FPS",
+            "font": "Inter",
+            "size": 36.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_26",
+          "start": 15.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #26 @ 60 FPS",
+            "font": "Inter",
+            "size": 40.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_27",
+          "start": 17.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #27 @ 60 FPS",
+            "font": "Inter",
+            "size": 44.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_28",
+          "start": 20.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #28 @ 60 FPS",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_29",
+          "start": 22.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #29 @ 60 FPS",
+            "font": "Inter",
+            "size": 52.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_30",
+          "start": 25.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #30 @ 60 FPS",
+            "font": "Inter",
+            "size": 56.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_31",
+          "start": 27.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #31 @ 60 FPS",
+            "font": "Inter",
+            "size": 60.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_32",
+          "start": 30.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #32 @ 60 FPS",
+            "font": "Inter",
+            "size": 32.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_33",
+          "start": 32.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #33 @ 60 FPS",
+            "font": "Inter",
+            "size": 36.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_34",
+          "start": 35.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #34 @ 60 FPS",
+            "font": "Inter",
+            "size": 40.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_35",
+          "start": 37.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #35 @ 60 FPS",
+            "font": "Inter",
+            "size": 44.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_36",
+          "start": 40.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #36 @ 60 FPS",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_37",
+          "start": 42.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #37 @ 60 FPS",
+            "font": "Inter",
+            "size": 52.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_38",
+          "start": 45.0,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #38 @ 60 FPS",
+            "font": "Inter",
+            "size": 56.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text_clip_39",
+          "start": 47.5,
+          "duration": 4.0,
+          "text": {
+            "text": "Kinetic Text Stream #39 @ 60 FPS",
+            "font": "Inter",
+            "size": 60.0,
+            "color": "#FFB000",
+            "align": "center"
+          },
+          "keyframes": {
+            "opacity": [
+              [
+                0.0,
+                0.0,
+                "linear"
+              ],
+              [
+                0.5,
+                1.0,
+                "ease_out"
+              ],
+              [
+                3.5,
+                1.0,
+                "linear"
+              ],
+              [
+                4.0,
+                0.0,
+                "ease_in"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "shape_track",
+      "kind": "shape",
+      "clips": [
+        {
+          "id": "shape_clip_00",
+          "start": 0.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 200.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_01",
+          "start": 5.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 220.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_02",
+          "start": 10.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 240.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_03",
+          "start": 15.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 260.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_04",
+          "start": 20.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 280.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_05",
+          "start": 25.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 300.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_06",
+          "start": 30.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 320.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_07",
+          "start": 35.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 340.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_08",
+          "start": 40.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 360.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        },
+        {
+          "id": "shape_clip_09",
+          "start": 45.0,
+          "duration": 5.0,
+          "shape": {
+            "shape": "rectangle",
+            "width": 380.0,
+            "height": 10.0,
+            "fill": "#00FFCC"
+          }
+        }
+      ]
+    }
+  ]
+}
