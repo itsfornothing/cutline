@@ -1,0 +1,14 @@
+# Rust target directories
+/target
+**/target
+
+# Benchmark outputs
+/benchmarks/*.mp4
+/benchmarks/*.png
+
+# IDE and OS
+.DS_Store
+*.swp
+*.iml
+.idea
+.vscode
