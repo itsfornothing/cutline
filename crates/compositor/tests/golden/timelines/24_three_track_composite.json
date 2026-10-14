@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "variables": {},
+  "outputs": [
+    {
+      "id": "main",
+      "aspect": "16:9",
+      "resolution": "1280x720",
+      "fps": 30,
+      "format": "mp4"
+    }
+  ],
+  "assets": {
+    "bars": {
+      "type": "video",
+      "src": "demo:bars",
+      "loop": true,
+      "duration": 5.0
+    },
+    "ocean": {
+      "type": "video",
+      "src": "demo:ocean_sunset",
+      "loop": true,
+      "duration": 5.0
+    },
+    "aurora": {
+      "type": "video",
+      "src": "demo:aurora",
+      "loop": true,
+      "duration": 5.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "asset": "ocean",
+          "start": 0.0,
+          "duration": 1.0,
+          "fit": "cover"
+        }
+      ]
+    },
+    {
+      "id": "v2",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c2",
+          "asset": "aurora",
+          "start": 0.0,
+          "duration": 1.0,
+          "position": {
+            "x": 200.0,
+            "y": 150.0
+          },
+          "scale": 0.3,
+          "opacity": 0.9
+        }
+      ]
+    },
+    {
+      "id": "v3",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "t1",
+          "start": 0.0,
+          "duration": 1.0,
+          "text": {
+            "text": "Layer 3 Title",
+            "font": "Inter",
+            "size": 48.0,
+            "color": "#FFB000",
+            "align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

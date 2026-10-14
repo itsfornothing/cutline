@@ -38,4 +38,11 @@ pub trait Compositor: Send + Sync {
         output_path: &Path,
         opts: &RenderOptions,
     ) -> Result<RenderReport, CompositorError>;
+
+    async fn render_frame(
+        &self,
+        timeline: &Timeline,
+        seconds: f64,
+        opts: &RenderOptions,
+    ) -> Result<Vec<u8>, CompositorError>;
 }

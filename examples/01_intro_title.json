@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "variables": {
+    "title": "Welcome to Cutline",
+    "subtitle": "Deterministic Video Rendering Engine"
+  },
+  "outputs": [
+    {
+      "id": "landscape_1080p",
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "bg": {
+      "type": "video",
+      "src": "demo:ocean_sunset",
+      "loop": true,
+      "duration": 5.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "bg_clip",
+          "asset": "bg",
+          "start": 0,
+          "duration": 3.0,
+          "fit": "cover"
+        }
+      ]
+    },
+    {
+      "id": "v2",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "title_clip",
+          "start": 0.5,
+          "duration": 2.5,
+          "text": {
+            "text": "{{title}}",
+            "font": "Inter",
+            "size": 72.0,
+            "color": "#FFB000",
+            "align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

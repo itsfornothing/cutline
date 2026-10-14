@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "variables": {},
+  "outputs": [
+    {
+      "id": "main",
+      "aspect": "16:9",
+      "resolution": "1280x720",
+      "fps": 30,
+      "format": "mp4"
+    }
+  ],
+  "assets": {
+    "aurora": {
+      "type": "video",
+      "src": "demo:aurora",
+      "loop": true,
+      "duration": 5.0
+    },
+    "ocean": {
+      "type": "video",
+      "src": "demo:ocean_sunset",
+      "loop": true,
+      "duration": 5.0
+    },
+    "bars": {
+      "type": "video",
+      "src": "demo:bars",
+      "loop": true,
+      "duration": 5.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "v1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "asset": "ocean",
+          "start": 0.0,
+          "duration": 1.0
+        }
+      ]
+    },
+    {
+      "id": "v2",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "t1",
+          "start": 0.0,
+          "duration": 1.0,
+          "text": {
+            "text": "Main Title",
+            "font": "Inter",
+            "size": 64.0,
+            "color": "#FFFFFF",
+            "align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}
