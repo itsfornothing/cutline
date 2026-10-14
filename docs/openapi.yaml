@@ -1,0 +1,728 @@
+openapi: 3.1.0
+info:
+  title: Cutline Video Rendering API
+  version: 1.0.0
+  description: |
+    Deterministic headless video rendering API with built-in forced alignment captions,
+    audio mixing (LUFS normalization & auto-ducking), multi-format smart reframing,
+    and C2PA provenance signing.
+servers:
+  - url: https://api.cutline.dev
+    description: Production API
+  - url: http://localhost:8080
+    description: Local development
+
+paths:
+  /healthz:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: cutline-api
+                  version:
+                    type: string
+                    example: 0.1.0
+
+  /v1/renders:
+    post:
+      summary: Create Render Job
+      operationId: createRender
+      description: |
+        Submits a video timeline for asynchronous rendering. Supports idempotency via the
+        `Idempotency-Key` header to safely retry requests without generating duplicate jobs.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Unique client key for idempotent request retry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timeline'
+      responses:
+        '201':
+          description: Render job created and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenderJob'
+        '400':
+          $ref: '#/components/responses/ProblemDetails'
+        '409':
+          description: Idempotency conflict (different payload submitted with same key)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+  /v1/renders/{id}:
+    get:
+      summary: Get Render Job Status
+      operationId: getRender
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Render status, stage timings, outputs, and billed metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenderJob'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Cancel Render Job
+      operationId: cancelRender
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Render job cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenderJob'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /v1/renders/{id}/events:
+    get:
+      summary: Stream Real-Time Progress Events
+      operationId: streamRenderEvents
+      description: Server-Sent Events (SSE) stream emitting real-time stage transitions and progress updates.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: SSE stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+  /v1/renders:validate:
+    post:
+      summary: Dry-Run Quote & Pre-flight Validation
+      operationId: validateRender
+      description: |
+        Free pre-flight dry run. Evaluates JSON schema validity, variable resolution,
+        asset reachability (SSRF checks), estimated render duration, and itemized cost quote.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timeline'
+      responses:
+        '200':
+          description: Validation result and cost quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+        '400':
+          $ref: '#/components/responses/ProblemDetails'
+
+  /v1/batches:
+    post:
+      summary: Create Batch Campaign
+      operationId: createBatch
+      description: |
+        Dispatches N render jobs from a single template and an array of variable overrides.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [template, items]
+              properties:
+                template:
+                  $ref: '#/components/schemas/Timeline'
+                items:
+                  type: array
+                  items:
+                    type: object
+                lane:
+                  type: string
+                  enum: [standard, priority]
+                  default: standard
+                priority:
+                  type: integer
+                  default: 0
+      responses:
+        '201':
+          description: Batch campaign created and enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRecord'
+        '400':
+          $ref: '#/components/responses/ProblemDetails'
+
+  /v1/batches/{id}:
+    get:
+      summary: Get Batch Progress Board
+      operationId: getBatch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Consolidated batch progress and itemized job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchProgressResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /v1/brand-kits:
+    post:
+      summary: Create Brand Kit
+      operationId: createBrandKit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBrandKitRequest'
+      responses:
+        '201':
+          description: Brand kit saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandKit'
+        '400':
+          $ref: '#/components/responses/ProblemDetails'
+
+  /v1/brand-kits/{id}:
+    get:
+      summary: Get Brand Kit
+      operationId: getBrandKit
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Brand kit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandKit'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /v1/templates:
+    post:
+      summary: Create Template
+      operationId: createTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id, name, timeline]
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                timeline:
+                  $ref: '#/components/schemas/Timeline'
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateRecord'
+
+  /v1/templates/{id}/golden:
+    post:
+      summary: Pin Golden Frame Reference Timestamps
+      operationId: pinGoldenFrames
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [timestamps]
+              properties:
+                timestamps:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: Golden baseline frames pinned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateRecord'
+
+  /v1/templates/{id}/ci-run:
+    post:
+      summary: Run Template Golden Frame CI Regression Check
+      operationId: runTemplateCi
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: CI run report with SSIM scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiRunReport'
+
+  /v1/usage:
+    get:
+      summary: Get Metered Usage Events
+      operationId: getUsage
+      responses:
+        '200':
+          description: Array of metered usage events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsageEvent'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API_KEY
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ProblemDetails:
+      description: RFC 9457 Problem Details error response
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+  schemas:
+    ProblemDetails:
+      type: object
+      required: [type, title, status, code]
+      properties:
+        type:
+          type: string
+          example: https://api.cutline.dev/errors/validation-failed
+        title:
+          type: string
+          example: Validation Failed
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+        code:
+          type: string
+          example: INVALID_TIMELINE
+        invalid_params:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              reason:
+                type: string
+              pointer:
+                type: string
+
+    Timeline:
+      type: object
+      required: [schema_version, outputs, tracks]
+      properties:
+        schema_version:
+          type: string
+          example: '1.0'
+        variables:
+          type: object
+          additionalProperties: true
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Output'
+        assets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Asset'
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+        audio:
+          $ref: '#/components/schemas/AudioConfig'
+        provenance:
+          $ref: '#/components/schemas/ProvenanceConfig'
+        delivery:
+          $ref: '#/components/schemas/DeliveryConfig'
+
+    Output:
+      type: object
+      required: [id, resolution, fps, format]
+      properties:
+        id:
+          type: string
+        aspect:
+          type: string
+          example: '16:9'
+        resolution:
+          type: object
+          required: [width, height]
+          properties:
+            width:
+              type: integer
+            height:
+              type: integer
+        fps:
+          type: integer
+          default: 30
+        format:
+          type: string
+          enum: [mp4, webm, mov, gif, png_sequence]
+        codec:
+          type: string
+          enum: [h264, h265, prores, vp9, av1]
+        reframe:
+          type: string
+          enum: [cover, fit, fill, smart]
+
+    Asset:
+      type: object
+      required: [type, src]
+      properties:
+        type:
+          type: string
+          enum: [video, audio, image, font]
+        src:
+          type: string
+        duration:
+          type: number
+        loop:
+          type: boolean
+
+    Track:
+      type: object
+      required: [id, kind, clips]
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+          enum: [video, audio, text, captions, shape]
+        clips:
+          type: array
+          items:
+            type: object
+        source:
+          type: object
+          properties:
+            align_audio:
+              type: string
+            language:
+              type: string
+        style:
+          type: object
+          properties:
+            preset:
+              type: string
+              enum: [karaoke, pop_in, boxed]
+            font:
+              type: string
+            highlight:
+              type: string
+            safe_zone:
+              type: string
+
+    AudioConfig:
+      type: object
+      properties:
+        normalize_lufs:
+          type: number
+          example: -14.0
+        duck:
+          type: object
+          properties:
+            under:
+              type: string
+            amount_db:
+              type: number
+
+    ProvenanceConfig:
+      type: object
+      properties:
+        c2pa:
+          type: boolean
+        ai_generated:
+          type: boolean
+
+    DeliveryConfig:
+      type: object
+      properties:
+        webhook:
+          type: string
+          format: uri
+        bucket:
+          type: string
+
+    RenderJob:
+      type: object
+      required: [id, tenant_id, status, lane, progress, billed_seconds]
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+        status:
+          type: string
+          enum: [queued, fetching, aligning, compositing, encoding, muxing, signing, uploading, succeeded, failed, cancelled]
+        lane:
+          type: string
+          enum: [standard, priority]
+        progress:
+          type: number
+        billed_seconds:
+          type: number
+        output_urls:
+          type: object
+          additionalProperties:
+            type: string
+        stages:
+          type: array
+          items:
+            type: object
+            properties:
+              stage:
+                type: string
+              duration_ms:
+                type: integer
+
+    ValidationResponse:
+      type: object
+      required: [valid, estimated_duration_seconds, estimated_total_usd, quote]
+      properties:
+        valid:
+          type: boolean
+        estimated_duration_seconds:
+          type: number
+        estimated_total_usd:
+          type: number
+        quote:
+          type: object
+        warnings:
+          type: array
+          items:
+            type: object
+
+    BatchRecord:
+      type: object
+      required: [id, tenant_id, total_jobs, render_ids, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+        total_jobs:
+          type: integer
+        render_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    BatchProgressResponse:
+      type: object
+      required: [batch_id, tenant_id, total_jobs, progress_pct, total_billed_seconds, renders]
+      properties:
+        batch_id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+        total_jobs:
+          type: integer
+        queued:
+          type: integer
+        running:
+          type: integer
+        succeeded:
+          type: integer
+        failed:
+          type: integer
+        cancelled:
+          type: integer
+        progress_pct:
+          type: number
+        total_billed_seconds:
+          type: number
+        renders:
+          type: array
+          items:
+            type: object
+
+    BrandKit:
+      type: object
+      required: [brand_id, tenant_id, name]
+      properties:
+        brand_id:
+          type: string
+        tenant_id:
+          type: string
+        name:
+          type: string
+        fonts:
+          type: object
+        colors:
+          type: object
+        logo_url:
+          type: string
+        intro_bumper_url:
+          type: string
+        outro_bumper_url:
+          type: string
+
+    CreateBrandKitRequest:
+      type: object
+      required: [brand_id, name]
+      properties:
+        brand_id:
+          type: string
+        name:
+          type: string
+        fonts:
+          type: object
+        colors:
+          type: object
+        logo_url:
+          type: string
+        intro_bumper_url:
+          type: string
+        outro_bumper_url:
+          type: string
+
+    TemplateRecord:
+      type: object
+      required: [id, tenant_id, name, timeline_template]
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        name:
+          type: string
+        timeline_template:
+          type: object
+        golden_timestamps:
+          type: array
+          items:
+            type: number
+        pinned_hashes:
+          type: object
+
+    CiRunReport:
+      type: object
+      required: [template_id, all_passed, min_ssim, threshold, frame_results]
+      properties:
+        template_id:
+          type: string
+        all_passed:
+          type: boolean
+        min_ssim:
+          type: number
+        threshold:
+          type: number
+        frame_results:
+          type: array
+          items:
+            type: object
+
+    UsageEvent:
+      type: object
+      required: [id, tenant_id, render_id, billed_seconds, cost_usd, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+        render_id:
+          type: string
+          format: uuid
+        billed_seconds:
+          type: number
+        cost_usd:
+          type: number
+        created_at:
+          type: string
+          format: date-time

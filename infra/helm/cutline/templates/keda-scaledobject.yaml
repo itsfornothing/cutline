@@ -1,0 +1,28 @@
+{{- if .Values.workers.autoscaling.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ .Release.Name }}-worker-scaler
+  labels:
+    app.kubernetes.io/name: cutline-worker
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Release.Name }}-worker
+  minReplicaCount: {{ .Values.workers.autoscaling.minWorkers }}
+  maxReplicaCount: {{ .Values.workers.autoscaling.maxWorkers }}
+  cooldownPeriod: 300
+  pollingInterval: 15
+  triggers:
+    - type: postgresql
+      metadata:
+        dbName: {{ .Values.database.name }}
+        host: {{ .Values.database.host }}
+        port: {{ .Values.database.port | quote }}
+        sslmode: {{ .Values.database.sslMode }}
+        query: "SELECT count(*) FROM render_jobs WHERE status = 'queued'"
+        targetQueryValue: {{ .Values.workers.autoscaling.queueDepthThreshold | quote }}
+      authenticationRef:
+        name: {{ .Release.Name }}-keda-db-auth
+{{- end }}

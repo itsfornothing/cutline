@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cutline"
+version = "0.1.0"
+description = "Official Python SDK for Cutline Video Rendering API"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT OR Apache-2.0" }
+authors = [{ name = "Cutline Team", email = "engineering@cutline.dev" }]
+keywords = ["video", "rendering", "cutline", "api", "ffmpeg", "compositor", "captions"]
+dependencies = [
+    "requests>=2.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
