@@ -12,6 +12,9 @@ path = "src/main.rs"
 [dependencies]
 cutline-schema = { workspace = true }
 cutline-compositor = { workspace = true }
+cutline-scheduler = { workspace = true }
+cutline-worker = { workspace = true }
+cutline-api = { workspace = true }
 tokio = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }

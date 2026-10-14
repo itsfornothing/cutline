@@ -181,6 +181,42 @@ async fn main() {
         "schema" => {
             println!("{}", export_json_schema());
         }
+        "serve" => {
+            let port = get_opt_value(&args, "--port")
+                .and_then(|p| p.parse::<u16>().ok())
+                .unwrap_or(8080);
+            let workers = get_opt_value(&args, "--workers")
+                .and_then(|w| w.parse::<usize>().ok())
+                .unwrap_or(4);
+
+            println!("Starting Cutline Rendering API on 0.0.0.0:{port} with {workers} workers...");
+
+            let repo = std::sync::Arc::new(cutline_scheduler::MemoryJobRepository::new());
+            let queue = cutline_scheduler::JobQueue::new(repo.clone());
+            let fetcher = cutline_worker::SafeFetcher::new(cutline_worker::FetcherConfig::default());
+            let webhooks = cutline_worker::WebhookDispatcher::new("cutline_webhook_secret");
+
+            let sandbox_dir = std::env::temp_dir().join("cutline_server_sandbox");
+            let _pool = cutline_worker::WorkerPool::new(
+                cutline_worker::WorkerPoolConfig {
+                    num_workers: workers,
+                    lane: None,
+                    sandbox_base: sandbox_dir,
+                },
+                queue.clone(),
+                fetcher.clone(),
+                webhooks.clone(),
+            );
+
+            let state = cutline_api::AppState::new(queue, fetcher, webhooks, "cutline_signing_secret");
+            let addr = std::net::SocketAddr::from(([0, 0, 0, 0], port));
+
+            println!("Cutline API listening on http://localhost:{port}");
+            if let Err(e) = cutline_api::run_server(state, addr).await {
+                eprintln!("Server error: {e}");
+                exit(1);
+            }
+        }
         other => {
             eprintln!("Unknown subcommand: '{}'", other);
             print_usage();
@@ -209,6 +245,8 @@ USAGE:
     cutline <SUBCOMMAND> [OPTIONS]
 
 SUBCOMMANDS:
+    serve                         Run the Cutline REST API and background worker pool
+                                  Options: --port <PORT> (default 8080), --workers <N> (default 4)
     render <in.json> <out.mp4>    Render a timeline into a platform-ready video
                                   Options: --gpu auto|off, --output <id>
     validate <in.json>            Validate timeline JSON schema and asset references
