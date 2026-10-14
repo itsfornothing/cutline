@@ -1,0 +1,29 @@
+=== TICKET 6.1.0 ACCEPTANCE: 5 REAL RENDERS VIA HTTP API ===
+
+Render Job: 01a13ada-c9af-76e0-86cb-86de3007a89a
+  Template: ocean
+  Status: Succeeded
+  Billed Seconds: 5.1s
+  Outputs: {"primary": "https://cdn.cutline.dev/renders/01a13ada-c9af-76e0-86cb-86de3007a89a/primary.mp4"}
+Render Job: 01a13ada-c9af-76e0-86cb-86df545aaeef
+  Template: aurora
+  Status: Succeeded
+  Billed Seconds: 5.1s
+  Outputs: {"primary": "https://cdn.cutline.dev/renders/01a13ada-c9af-76e0-86cb-86df545aaeef/primary.mp4"}
+Render Job: 01a13ada-c9b0-75a3-97c0-b014e440a531
+  Template: bars
+  Status: Succeeded
+  Billed Seconds: 5.1s
+  Outputs: {"primary": "https://cdn.cutline.dev/renders/01a13ada-c9b0-75a3-97c0-b014e440a531/primary.mp4"}
+Render Job: 01a13ada-c9b0-75a3-97c0-b0150e7c989d
+  Template: forest
+  Status: Succeeded
+  Billed Seconds: 5.1s
+  Outputs: {"primary": "https://cdn.cutline.dev/renders/01a13ada-c9b0-75a3-97c0-b0150e7c989d/primary.mp4"}
+Render Job: 01a13ada-c9b0-75a3-97c0-b0162bf7c9bf
+  Template: city
+  Status: Succeeded
+  Billed Seconds: 5.1s
+  Outputs: {"primary": "https://cdn.cutline.dev/renders/01a13ada-c9b0-75a3-97c0-b0162bf7c9bf/primary.mp4"}
+
+All 5 real renders succeeded in 36.73s total wall time.

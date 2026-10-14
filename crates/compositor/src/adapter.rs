@@ -116,6 +116,7 @@ impl Compositor for FilmCraftCompositor {
         );
 
         let mut cmd = Command::new(&self.cli_binary_path);
+        cmd.kill_on_drop(true);
         cmd.arg("export")
             .arg(output_path)
             .arg("--project")
@@ -197,6 +198,7 @@ impl Compositor for FilmCraftCompositor {
             .map_err(|e| CompositorError::Internal(format!("failed to write temp project: {e}")))?;
 
         let mut cmd = Command::new(&self.cli_binary_path);
+        cmd.kill_on_drop(true);
         cmd.arg("render")
             .arg("--project")
             .arg(&project_file)

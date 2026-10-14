@@ -58,7 +58,7 @@ async fn test_phase2_acceptance_500_concurrent_jobs_soak() {
     let sandbox_dir = std::env::temp_dir().join(format!("cutline_soak_{}", uuid::Uuid::new_v4()));
 
     // Spawn worker pool with 16 parallel workers
-    let pool = WorkerPool::new(
+    let pool = WorkerPool::new_simulated(
         WorkerPoolConfig {
             num_workers: 16,
             lane: None, // Processes both priority and standard lanes

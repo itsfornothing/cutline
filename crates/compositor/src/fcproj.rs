@@ -66,9 +66,10 @@ impl ProjectBuilder {
                     "leader" | "counting_leader" => json!({ "Generator": "CountingLeader" }),
                     "color_matte" => json!({ "Generator": { "ColorMatte": { "color": [0.08, 0.1, 0.16, 1.0] } } }),
                     "aurora" => json!({ "Generator": { "Demo": "Aurora" } }),
-                    "city" | "night_drive" => json!({ "Generator": { "Demo": "CityNightDrive" } }),
-                    "forest" => json!({ "Generator": { "Demo": "MistyForest" } }),
-                    "neon" => json!({ "Generator": { "Demo": "NeonLoop" } }),
+                    "city" | "night_drive" => json!({ "Generator": { "Demo": "CityNight" } }),
+                    "forest" => json!({ "Generator": { "Demo": "Forest" } }),
+                    "dunes" => json!({ "Generator": { "Demo": "Dunes" } }),
+                    "plasma" => json!({ "Generator": { "Demo": "Plasma" } }),
                     _ => json!({ "Generator": { "Demo": "OceanSunset" } }),
                 }
             } else {

@@ -24,7 +24,7 @@ use cutline_scheduler::{
 };
 use cutline_schema::types::*;
 use cutline_worker::{
-    FetcherConfig, JobRunner, SafeFetcher, WebhookDispatcher, WorkerPool, WorkerPoolConfig,
+    FetcherConfig, JobRunner, SafeFetcher, SimulatedJobRunner, WebhookDispatcher, WorkerPool, WorkerPoolConfig,
 };
 use serde_json::Value;
 use std::collections::HashMap;
@@ -581,7 +581,7 @@ async fn test_phase3_end_to_end_worker_pipeline_with_all_differentiators() {
 
     // Run execution through JobRunner
     let sandbox = std::env::temp_dir().join(format!("cutline_e2e_{}", uuid::Uuid::new_v4()));
-    let runner = JobRunner::new("test-worker-e2e", fetcher, webhooks, sandbox.clone());
+    let runner = SimulatedJobRunner::new("test-worker-e2e", fetcher, webhooks, sandbox.clone());
 
     let completed = runner.run_job(enqueued, &queue).await.unwrap();
     assert_eq!(completed.status, RenderStatus::Succeeded);

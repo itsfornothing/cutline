@@ -4,32 +4,44 @@ use cutline_scheduler::{
 };
 use cutline_worker::{
     FetchError, FetcherConfig, JobRunner, SafeFetcher, WebhookDispatcher,
-};
-use std::collections::HashMap;
 use std::sync::Arc;
 
 fn sample_timeline() -> Timeline {
-    Timeline {
-        schema_version: "1.0".to_string(),
-        variables: HashMap::new(),
-        outputs: vec![Output {
-            id: "tt".to_string(),
-            aspect: Some("9:16".to_string()),
-            resolution: Resolution {
-                width: 1080,
-                height: 1920,
-            },
-            fps: 30,
-            format: OutputFormat::Mp4,
-            codec: Some(VideoCodec::H264),
-            reframe: None,
-        }],
-        assets: HashMap::new(),
-        tracks: vec![],
-        audio: None,
-        provenance: None,
-        delivery: None,
-    }
+    serde_json::from_value(serde_json::json!({
+        "schema_version": "1.0",
+        "outputs": [
+            {
+                "id": "out",
+                "aspect": "16:9",
+                "resolution": "1280x720",
+                "fps": 30,
+                "format": "mp4"
+            }
+        ],
+        "assets": {
+            "ocean": {
+                "type": "video",
+                "src": "demo:ocean_sunset",
+                "loop": true,
+                "duration": 5.0
+            }
+        },
+        "tracks": [
+            {
+                "id": "v1",
+                "kind": "video",
+                "clips": [
+                    {
+                        "id": "c1",
+                        "asset": "ocean",
+                        "start": 0,
+                        "duration": 2.0
+                    }
+                ]
+            }
+        ]
+    }))
+    .unwrap()
 }
 
 #[tokio::test]
@@ -107,7 +119,7 @@ async fn test_job_runner_full_pipeline_execution() {
     let webhooks = WebhookDispatcher::new("secret");
     let temp_dir = std::env::temp_dir().join(format!("cutline_test_{}", uuid::Uuid::new_v4()));
 
-    let runner = JobRunner::new("worker-test-1", fetcher, webhooks, &temp_dir);
+    let runner = JobRunner::with_default_compositor("worker-test-1", fetcher, webhooks, &temp_dir).unwrap();
 
     let job = RenderJob::new("tenant_1", sample_timeline(), RenderLane::Standard, 0, None, None);
     let job_id = job.id;
