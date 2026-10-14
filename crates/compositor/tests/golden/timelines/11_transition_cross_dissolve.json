@@ -11,9 +11,9 @@
     }
   ],
   "assets": {
-    "bars": {
+    "aurora": {
       "type": "video",
-      "src": "demo:bars",
+      "src": "demo:aurora",
       "loop": true,
       "duration": 5.0
     },
@@ -23,9 +23,9 @@
       "loop": true,
       "duration": 5.0
     },
-    "aurora": {
+    "bars": {
       "type": "video",
-      "src": "demo:aurora",
+      "src": "demo:bars",
       "loop": true,
       "duration": 5.0
     }

@@ -442,3 +442,65 @@ pub enum RenderEvent {
     },
 }
 
+/// Batch rendering campaign grouping multiple parameterized renders.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BatchRecord {
+    pub id: Uuid,
+    pub tenant_id: String,
+    pub total_jobs: usize,
+    pub render_ids: Vec<RenderId>,
+    pub created_at: DateTime<Utc>,
+}
+
+/// Brand identity definition for automated visual styling injection.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BrandKit {
+    pub brand_id: String,
+    pub tenant_id: String,
+    pub name: String,
+    pub fonts: HashMap<String, String>,
+    pub colors: HashMap<String, String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub logo_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub intro_bumper_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub outro_bumper_url: Option<String>,
+    pub created_at: DateTime<Utc>,
+}
+
+/// Template with pinned golden frame timestamps for CI visual regression testing.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TemplateRecord {
+    pub id: String,
+    pub tenant_id: String,
+    pub name: String,
+    pub timeline_template: serde_json::Value,
+    pub golden_timestamps: Vec<f64>,
+    pub pinned_hashes: HashMap<String, String>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+}
+
+/// Individual frame comparison result from template CI regression test.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CiFrameResult {
+    pub timestamp: f64,
+    pub expected_hash: String,
+    pub actual_hash: String,
+    pub ssim: f64,
+    pub passed: bool,
+}
+
+/// Comprehensive report for template golden frame CI test run.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CiRunReport {
+    pub template_id: String,
+    pub all_passed: bool,
+    pub min_ssim: f64,
+    pub threshold: f64,
+    pub frame_results: Vec<CiFrameResult>,
+    pub ran_at: DateTime<Utc>,
+}
+
+

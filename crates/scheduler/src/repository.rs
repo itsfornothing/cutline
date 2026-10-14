@@ -77,6 +77,22 @@ pub trait JobRepository: Send + Sync {
     async fn add_api_key(&self, key: ApiKey) -> Result<(), RepositoryError>;
     async fn get_api_key_by_hash(&self, key_hash: &str) -> Result<Option<ApiKey>, RepositoryError>;
     async fn get_usage_events(&self, tenant_id: &str) -> Result<Vec<UsageEvent>, RepositoryError>;
+
+    async fn save_batch(&self, batch: crate::types::BatchRecord) -> Result<(), RepositoryError>;
+    async fn get_batch(&self, id: uuid::Uuid) -> Result<Option<crate::types::BatchRecord>, RepositoryError>;
+
+    async fn save_brand_kit(&self, kit: crate::types::BrandKit) -> Result<(), RepositoryError>;
+    async fn get_brand_kit(&self, tenant_id: &str, brand_id: &str) -> Result<Option<crate::types::BrandKit>, RepositoryError>;
+
+    async fn save_template(&self, template: crate::types::TemplateRecord) -> Result<(), RepositoryError>;
+    async fn get_template(&self, tenant_id: &str, id: &str) -> Result<Option<crate::types::TemplateRecord>, RepositoryError>;
+    async fn pin_golden_frames(
+        &self,
+        tenant_id: &str,
+        id: &str,
+        timestamps: Vec<f64>,
+        hashes: HashMap<String, String>,
+    ) -> Result<crate::types::TemplateRecord, RepositoryError>;
 }
 
 /// High-performance in-memory repository for unit, integration, and soak testing.
@@ -87,6 +103,9 @@ pub struct MemoryJobRepository {
     idempotency_index: Arc<RwLock<HashMap<(String, String), RenderId>>>,
     api_keys: Arc<RwLock<HashMap<String, ApiKey>>>,
     usage_events: Arc<RwLock<Vec<UsageEvent>>>,
+    batches: Arc<RwLock<HashMap<uuid::Uuid, crate::types::BatchRecord>>>,
+    brand_kits: Arc<RwLock<HashMap<(String, String), crate::types::BrandKit>>>,
+    templates: Arc<RwLock<HashMap<(String, String), crate::types::TemplateRecord>>>,
 }
 
 impl MemoryJobRepository {
@@ -510,5 +529,62 @@ impl JobRepository for MemoryJobRepository {
             .cloned()
             .collect();
         Ok(events)
+    }
+
+    async fn save_batch(&self, batch: crate::types::BatchRecord) -> Result<(), RepositoryError> {
+        let mut batches = self.batches.write().await;
+        batches.insert(batch.id, batch);
+        Ok(())
+    }
+
+    async fn get_batch(&self, id: uuid::Uuid) -> Result<Option<crate::types::BatchRecord>, RepositoryError> {
+        let batches = self.batches.read().await;
+        Ok(batches.get(&id).cloned())
+    }
+
+    async fn save_brand_kit(&self, kit: crate::types::BrandKit) -> Result<(), RepositoryError> {
+        let mut kits = self.brand_kits.write().await;
+        let key = (kit.tenant_id.clone(), kit.brand_id.clone());
+        kits.insert(key, kit);
+        Ok(())
+    }
+
+    async fn get_brand_kit(&self, tenant_id: &str, brand_id: &str) -> Result<Option<crate::types::BrandKit>, RepositoryError> {
+        let kits = self.brand_kits.read().await;
+        let key = (tenant_id.to_string(), brand_id.to_string());
+        Ok(kits.get(&key).cloned())
+    }
+
+    async fn save_template(&self, template: crate::types::TemplateRecord) -> Result<(), RepositoryError> {
+        let mut templates = self.templates.write().await;
+        let key = (template.tenant_id.clone(), template.id.clone());
+        templates.insert(key, template);
+        Ok(())
+    }
+
+    async fn get_template(&self, tenant_id: &str, id: &str) -> Result<Option<crate::types::TemplateRecord>, RepositoryError> {
+        let templates = self.templates.read().await;
+        let key = (tenant_id.to_string(), id.to_string());
+        Ok(templates.get(&key).cloned())
+    }
+
+    async fn pin_golden_frames(
+        &self,
+        tenant_id: &str,
+        id: &str,
+        timestamps: Vec<f64>,
+        hashes: HashMap<String, String>,
+    ) -> Result<crate::types::TemplateRecord, RepositoryError> {
+        let mut templates = self.templates.write().await;
+        let key = (tenant_id.to_string(), id.to_string());
+        let template = templates
+            .get_mut(&key)
+            .ok_or_else(|| RepositoryError::NotFound(uuid::Uuid::nil()))?;
+
+        template.golden_timestamps = timestamps;
+        template.pinned_hashes = hashes;
+        template.updated_at = Utc::now();
+
+        Ok(template.clone())
     }
 }

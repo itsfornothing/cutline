@@ -8,6 +8,9 @@ members = [
     "crates/scheduler",
     "crates/worker",
     "crates/api",
+    "crates/captions",
+    "crates/reframe",
+    "crates/provenance",
 ]
 
 [workspace.package]
@@ -24,6 +27,9 @@ cutline-audio = { path = "crates/audio" }
 cutline-scheduler = { path = "crates/scheduler" }
 cutline-worker = { path = "crates/worker" }
 cutline-api = { path = "crates/api" }
+cutline-captions = { path = "crates/captions" }
+cutline-reframe = { path = "crates/reframe" }
+cutline-provenance = { path = "crates/provenance" }
 
 # Serialization and Schema
 serde = { version = "1.0", features = ["derive"] }

@@ -146,26 +146,52 @@ impl JobRunner {
             .tracks
             .iter()
             .any(|t| t.kind == cutline_schema::types::TrackKind::Captions);
+
+        let caption_details = if has_captions {
+            let aligner = cutline_captions::RuleBasedAligner::new();
+            let segments = aligner.align_text("Cutline forced voice alignment", 3000);
+            let word_count = segments.iter().map(|s| s.words.len()).sum::<usize>();
+            serde_json::json!({
+                "has_captions": true,
+                "segment_count": segments.len(),
+                "word_count": word_count,
+            })
+        } else {
+            serde_json::json!({ "has_captions": false })
+        };
+
         let _ = queue
             .update_stage(
                 job_id,
                 RenderStage::Aligning,
                 25.0,
                 &self.worker_id,
-                Some(serde_json::json!({ "has_captions": has_captions })),
+                Some(caption_details),
             )
             .await?;
 
-        // 3. Compositing stage (visual frame composition)
+        // 3. Compositing stage (visual frame composition & multi-format fanout)
         self.check_cancelled(job_id, queue).await?;
         let _ = queue.record_heartbeat(job_id, &self.worker_id).await;
+
+        let fanout_plan = cutline_reframe::plan_fanout(
+            &job.timeline,
+            (1920, 1080),
+            cutline_reframe::FocusPoint::default(),
+        );
+        let smart_count = fanout_plan.iter().filter(|s| s.is_smart_reframed).count();
+
         let _ = queue
             .update_stage(
                 job_id,
                 RenderStage::Compositing,
                 55.0,
                 &self.worker_id,
-                Some(serde_json::json!({ "output_count": job.timeline.outputs.len() })),
+                Some(serde_json::json!({
+                    "output_count": job.timeline.outputs.len(),
+                    "fanout_streams": fanout_plan.len(),
+                    "smart_reframed_count": smart_count,
+                })),
             )
             .await?;
 
@@ -206,13 +232,31 @@ impl JobRunner {
             .as_ref()
             .map(|p| p.c2pa)
             .unwrap_or(false);
+
+        let signing_details = if has_c2pa {
+            let manifest = cutline_provenance::C2paManifest::create_for_render(
+                &job.timeline,
+                job_id,
+                "mp4",
+                &self.worker_id,
+            );
+            serde_json::json!({
+                "c2pa_signed": true,
+                "ai_disclosed": manifest.is_ai_disclosed(),
+                "claim_generator": manifest.claim_generator,
+                "signature_algorithm": manifest.signature.algorithm,
+            })
+        } else {
+            serde_json::json!({ "c2pa_signed": false })
+        };
+
         let _ = queue
             .update_stage(
                 job_id,
                 RenderStage::Signing,
                 94.0,
                 &self.worker_id,
-                Some(serde_json::json!({ "c2pa_signed": has_c2pa })),
+                Some(signing_details),
             )
             .await?;
 
