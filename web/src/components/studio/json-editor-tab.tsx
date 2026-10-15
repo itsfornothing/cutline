@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, CheckCircle2, Code2, Copy, Check } from 'lucide-react';
+import Editor, { Monaco, BeforeMount } from '@monaco-editor/react';
+import timelineSchema from '../../schema/timeline.json';
 
 interface JsonEditorTabProps {
   timeline: any;
@@ -12,14 +14,36 @@ export const JsonEditorTab: React.FC<JsonEditorTabProps> = ({ timeline, onChange
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    setJsonString(JSON.stringify(timeline, null, 2));
-    setParseError(null);
+    try {
+      const formatted = JSON.stringify(timeline, null, 2);
+      setJsonString(formatted);
+      setParseError(null);
+    } catch (err: any) {
+      setParseError(err.message);
+    }
   }, [timeline]);
 
-  const handleTextChange = (val: string) => {
-    setJsonString(val);
+  const handleBeforeMount: BeforeMount = (monaco: Monaco) => {
+    // Configure JSON diagnostics with our official Cutline Timeline schema
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      allowComments: false,
+      schemas: [
+        {
+          uri: 'https://cutline.dev/schema/v1.0/timeline.json',
+          fileMatch: ['*'],
+          schema: timelineSchema,
+        },
+      ],
+      enableSchemaRequest: false,
+    });
+  };
+
+  const handleEditorChange = (val: string | undefined) => {
+    const content = val ?? '';
+    setJsonString(content);
     try {
-      const parsed = JSON.parse(val);
+      const parsed = JSON.parse(content);
       setParseError(null);
       onChange(parsed);
     } catch (err: any) {
@@ -46,12 +70,12 @@ export const JsonEditorTab: React.FC<JsonEditorTabProps> = ({ timeline, onChange
           {parseError ? (
             <span className="flex items-center gap-1 text-[10px] text-red-400">
               <AlertCircle className="w-3 h-3" />
-              <span>SCHEMA ERROR</span>
+              <span>SCHEMA / SYNTAX ERROR</span>
             </span>
           ) : (
             <span className="flex items-center gap-1 text-[10px] text-emerald-400">
               <CheckCircle2 className="w-3 h-3" />
-              <span>VALID JSON</span>
+              <span>VALID TIMELINE JSON</span>
             </span>
           )}
 
@@ -59,19 +83,46 @@ export const JsonEditorTab: React.FC<JsonEditorTabProps> = ({ timeline, onChange
             onClick={handleCopy}
             className="p-1 text-neutral-400 hover:text-neutral-200 transition-colors"
             title="Copy JSON"
+            aria-label="Copy JSON"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>
 
-      {/* Code Textarea Area */}
+      {/* Real Monaco Editor Container */}
       <div className="flex-1 relative bg-canvas-dark overflow-hidden">
-        <textarea
+        <Editor
+          height="100%"
+          defaultLanguage="json"
+          theme="vs-dark"
           value={jsonString}
-          onChange={(e) => handleTextChange(e.target.value)}
-          spellCheck={false}
-          className="w-full h-full bg-transparent text-neutral-200 p-3 font-mono text-[11px] leading-relaxed resize-none outline-hidden border-0"
+          beforeMount={handleBeforeMount}
+          onChange={handleEditorChange}
+          options={{
+            minimap: { enabled: false },
+            fontSize: 12,
+            lineNumbers: 'on',
+            scrollBeyondLastLine: false,
+            automaticLayout: true,
+            tabSize: 2,
+            wordWrap: 'on',
+            formatOnPaste: true,
+            formatOnType: true,
+            suggest: {
+              snippetsPreventQuickSuggestions: false,
+            },
+            quickSuggestions: {
+              other: true,
+              comments: false,
+              strings: true,
+            },
+          }}
+          loading={
+            <div className="flex items-center justify-center h-full text-neutral-500 font-sans text-xs">
+              Loading Monaco Editor...
+            </div>
+          }
         />
       </div>
 

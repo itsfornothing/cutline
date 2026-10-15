@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-10-15T14:40:21.569Z",
+  "environment": {
+    "node": "v22.22.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "bundle": {
+    "mainBundle": "index-BDOg8Yx_.js",
+    "rawKb": 268.89,
+    "gzKb": 77.54,
+    "budgetKb": 250
+  },
+  "monaco": {
+    "integrated": true,
+    "schemaUri": "https://cutline.dev/schema/v1.0/timeline.json"
+  },
+  "accessibility": {
+    "rulesEvaluated": 6,
+    "violations": 0,
+    "axeScore": 100
+  },
+  "timelineStress": {
+    "clips": 500,
+    "framesSampled": 120,
+    "p50Ms": 0.042,
+    "p95Ms": 0.061,
+    "p99Ms": 0.296,
+    "effectiveFps": 21248.2,
+    "targetBudgetMs": 16.67
+  }
+}

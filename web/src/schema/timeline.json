@@ -1,0 +1,945 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Timeline",
+  "description": "Root Cutline timeline specification.",
+  "type": "object",
+  "properties": {
+    "assets": {
+      "description": "Assets referenced by timeline tracks (video, audio, images, fonts).",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Asset"
+      },
+      "default": {}
+    },
+    "audio": {
+      "description": "Global audio configuration (loudness normalization, auto-ducking).",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AudioConfig"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "delivery": {
+      "description": "Output delivery configuration (webhooks, signed bucket uploads).",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DeliveryConfig"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "outputs": {
+      "description": "Target render outputs (supports multi-format fan-out: e.g. 9:16 and 16:9).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Output"
+      }
+    },
+    "provenance": {
+      "description": "Content provenance and C2PA metadata signing configuration.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ProvenanceConfig"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "description": "Schema version (e.g. \"1.0\").",
+      "type": "string",
+      "default": "1.0"
+    },
+    "tracks": {
+      "description": "Multi-track timeline tracks (video, audio, captions, text, shapes).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Track"
+      }
+    },
+    "variables": {
+      "description": "Variables for template substitution before rendering (e.g. {{title}}, {{voice_url}}).",
+      "type": "object",
+      "additionalProperties": true,
+      "default": {}
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "outputs",
+    "tracks"
+  ],
+  "$defs": {
+    "Asset": {
+      "description": "Media asset descriptor.",
+      "type": "object",
+      "properties": {
+        "duration": {
+          "description": "Known or overridden duration in seconds.",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "loop": {
+          "description": "Whether to loop playback if shorter than clip duration.",
+          "type": "boolean",
+          "default": false
+        },
+        "src": {
+          "description": "Source URI (https://..., s3://..., file://...).",
+          "type": "string"
+        },
+        "type": {
+          "description": "Asset type: video, audio, image, font.",
+          "$ref": "#/$defs/AssetType"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "src"
+      ]
+    },
+    "AssetType": {
+      "description": "Category of asset.",
+      "type": "string",
+      "enum": [
+        "video",
+        "audio",
+        "image",
+        "font"
+      ]
+    },
+    "AudioConfig": {
+      "description": "Global audio mastering, normalization and auto-ducking configuration.",
+      "type": "object",
+      "properties": {
+        "duck": {
+          "description": "Voice auto-ducking parameters.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DuckConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalize_lufs": {
+          "description": "Target integrated loudness normalization in LUFS (e.g. -14.0 for social/web platforms).",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaptionSource": {
+      "description": "Caption source alignment configuration.",
+      "type": "object",
+      "properties": {
+        "align_audio": {
+          "description": "Audio asset ID used for word-level forced alignment.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language code (e.g. \"en\", \"ar\", \"am\", or \"auto\").",
+          "type": "string",
+          "default": "auto"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "align_audio"
+      ]
+    },
+    "CaptionStyle": {
+      "description": "Caption visual styling and safe-zone placement.",
+      "type": "object",
+      "properties": {
+        "color": {
+          "description": "Text primary color (e.g. \"#FFFFFF\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "font": {
+          "description": "Font family (e.g. \"Inter\", \"Geeza Pro\", \"Kefa\").",
+          "type": "string",
+          "default": "Inter"
+        },
+        "font_size": {
+          "description": "Font size in pixels.",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "highlight": {
+          "description": "Highlight color for the spoken word (e.g. \"#FFB000\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "preset": {
+          "description": "Style preset: \"karaoke\", \"pop_in\", \"boxed\", \"classic\".",
+          "type": "string",
+          "default": "karaoke"
+        },
+        "safe_zone": {
+          "description": "Safe zone overlay boundary (\"tiktok\", \"reels\", \"shorts\", \"none\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Clip": {
+      "description": "Individual clip placed on a timeline track.",
+      "type": "object",
+      "properties": {
+        "asset": {
+          "description": "Asset ID referenced from root `assets` map.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duration": {
+          "description": "Duration of the clip. Can be seconds (float), frames (\"frames:N\"), or automatic (\"auto:<asset>\").",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimeDuration"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fit": {
+          "description": "Scaling behavior (cover, contain, fill, none).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FitMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "id": {
+          "description": "Optional clip id.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keyframes": {
+          "description": "Animated property keyframe lanes (e.g. scale, position, opacity).",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/KeyframePoint"
+            }
+          }
+        },
+        "offset": {
+          "description": "Media playback offset / source in time.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimePosition"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "opacity": {
+          "description": "Opacity factor (0.0 transparent to 1.0 fully opaque).",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "position": {
+          "description": "2D Position [x, y] in pixels or percentages.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Vec2D"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rotation": {
+          "description": "Rotation angle in degrees.",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "scale": {
+          "description": "Scale factor (1.0 = 100%).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ScaleValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shape": {
+          "description": "Shape clip configuration (when placed on a shape track).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ShapeClipConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "start": {
+          "description": "Start timestamp on the timeline.",
+          "$ref": "#/$defs/TimePosition",
+          "default": 0.0
+        },
+        "text": {
+          "description": "Text clip configuration (when placed on a text track).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TextClipConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transition_in": {
+          "description": "In-transition (e.g. cross_dissolve).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Transition"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transition_out": {
+          "description": "Out-transition (e.g. dip_to_black).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Transition"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeliveryConfig": {
+      "description": "Delivery options upon render completion.",
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "description": "Destination object storage bucket (e.g. \"s3://client/out/\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "webhook": {
+          "description": "Webhook URL invoked on state transition / completion.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "DuckConfig": {
+      "description": "Ducking settings for background audio.",
+      "type": "object",
+      "properties": {
+        "amount_db": {
+          "description": "Gain reduction in decibels (e.g. -12.0).",
+          "type": "number",
+          "format": "float"
+        },
+        "attack_ms": {
+          "description": "Attack ramp time in milliseconds (default 50 ms).",
+          "type": "integer",
+          "format": "uint32",
+          "default": 50,
+          "minimum": 0
+        },
+        "release_ms": {
+          "description": "Release recovery time in milliseconds (default 200 ms).",
+          "type": "integer",
+          "format": "uint32",
+          "default": 200,
+          "minimum": 0
+        },
+        "under": {
+          "description": "Role to duck under (e.g. \"voice\").",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "under",
+        "amount_db"
+      ]
+    },
+    "Easing": {
+      "description": "Keyframe easing curve.",
+      "type": "string",
+      "enum": [
+        "linear",
+        "ease_in",
+        "ease_out",
+        "ease_in_out",
+        "hold"
+      ]
+    },
+    "FitMode": {
+      "description": "Clip scaling mode.",
+      "type": "string",
+      "enum": [
+        "cover",
+        "contain",
+        "fill",
+        "none"
+      ]
+    },
+    "KeyframePoint": {
+      "description": "Keyframe point: [time, value, easing] or { time, value, easing }.",
+      "type": "object",
+      "properties": {
+        "easing": {
+          "$ref": "#/$defs/Easing"
+        },
+        "time": {
+          "type": "number",
+          "format": "double"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "time",
+        "value",
+        "easing"
+      ]
+    },
+    "Output": {
+      "description": "Specifications for an exported output video.",
+      "type": "object",
+      "properties": {
+        "aspect": {
+          "description": "Aspect ratio (e.g. \"9:16\", \"16:9\", \"1:1\", \"4:5\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "codec": {
+          "description": "Video codec (h264, hevc, prores, vp9, av1).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VideoCodec"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "description": "Container format (mp4, webm, gif, png_sequence).",
+          "$ref": "#/$defs/OutputFormat",
+          "default": "mp4"
+        },
+        "fps": {
+          "description": "Frame rate in frames per second (e.g. 24, 25, 30, 60).",
+          "type": "integer",
+          "format": "uint32",
+          "default": 30,
+          "minimum": 0
+        },
+        "id": {
+          "description": "Unique identifier for this output (e.g. \"tt\" for TikTok, \"yt\" for YouTube).",
+          "type": "string"
+        },
+        "reframe": {
+          "description": "Smart reframing behavior for different aspect ratios.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReframeMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolution": {
+          "description": "Output resolution (e.g. \"1080x1920\" or { \"width\": 1080, \"height\": 1920 }).",
+          "$ref": "#/$defs/Resolution",
+          "default": "1920x1080"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ]
+    },
+    "OutputFormat": {
+      "description": "Output container format.",
+      "type": "string",
+      "enum": [
+        "mp4",
+        "webm",
+        "gif",
+        "mov",
+        "pngsequence"
+      ]
+    },
+    "ProvenanceConfig": {
+      "description": "C2PA and AI provenance configuration.",
+      "type": "object",
+      "properties": {
+        "ai_generated": {
+          "description": "Disclose content as AI-generated.",
+          "type": "boolean",
+          "default": false
+        },
+        "c2pa": {
+          "description": "Embed C2PA manifest.",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReframeMode": {
+      "description": "Reframe mode when resizing across aspect ratios.",
+      "oneOf": [
+        {
+          "description": "AI/saliency face-aware automatic tracking crop.",
+          "type": "string",
+          "const": "smart"
+        },
+        {
+          "description": "Center crop to fill entire frame.",
+          "type": "string",
+          "const": "cover"
+        },
+        {
+          "description": "Letterbox / pillarbox to contain full picture.",
+          "type": "string",
+          "const": "fit"
+        },
+        {
+          "description": "Stretch to fit.",
+          "type": "string",
+          "const": "fill"
+        }
+      ]
+    },
+    "Resolution": {
+      "description": "Video frame dimensions (width and height).",
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "width": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ]
+    },
+    "ScaleValue": {
+      "description": "Scale value (uniform float or 2D [sx, sy]).",
+      "anyOf": [
+        {
+          "type": "number",
+          "format": "float"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        }
+      ]
+    },
+    "ShapeClipConfig": {
+      "description": "Shape clip configuration.",
+      "type": "object",
+      "properties": {
+        "fill": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number",
+          "format": "float"
+        },
+        "shape": {
+          "$ref": "#/$defs/ShapeType"
+        },
+        "stroke": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stroke_width": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "width": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "shape",
+        "width",
+        "height",
+        "fill"
+      ]
+    },
+    "ShapeType": {
+      "description": "Shape type.",
+      "type": "string",
+      "enum": [
+        "rectangle",
+        "circle",
+        "roundedrectangle"
+      ]
+    },
+    "TextAlign": {
+      "description": "Text alignment.",
+      "type": "string",
+      "enum": [
+        "center",
+        "left",
+        "right"
+      ]
+    },
+    "TextClipConfig": {
+      "description": "Text clip configuration.",
+      "type": "object",
+      "properties": {
+        "align": {
+          "$ref": "#/$defs/TextAlign",
+          "default": "center"
+        },
+        "color": {
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "font": {
+          "type": "string",
+          "default": "Inter"
+        },
+        "size": {
+          "type": "number",
+          "format": "float",
+          "default": 48.0
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "text"
+      ]
+    },
+    "TimeDuration": {
+      "description": "Time duration representing a length of time (seconds, frames, or auto:<asset>).",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "Seconds": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Seconds"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Frames": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Frames"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Auto": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Auto"
+          ]
+        }
+      ]
+    },
+    "TimePosition": {
+      "description": "Time position representing a point in time (in seconds or frames).",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "Zero"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Seconds": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Seconds"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Frames": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Frames"
+          ]
+        }
+      ]
+    },
+    "Track": {
+      "description": "Timeline track.",
+      "type": "object",
+      "properties": {
+        "clips": {
+          "description": "Clips contained in this track.",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Clip"
+          }
+        },
+        "id": {
+          "description": "Unique track identifier (e.g. \"v1\", \"a1\", \"c1\").",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind of track: video, audio, captions, text, shape.",
+          "$ref": "#/$defs/TrackKind"
+        },
+        "mix": {
+          "description": "Audio mixing role for ducking and loudness (e.g. \"voice\", \"music\", \"sfx\").",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TrackMix"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "description": "Caption source configuration (when kind == captions).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CaptionSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "style": {
+          "description": "Caption visual style and placement (when kind == captions).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CaptionStyle"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
+    "TrackKind": {
+      "description": "Track category.",
+      "type": "string",
+      "enum": [
+        "video",
+        "audio",
+        "captions",
+        "text",
+        "shape"
+      ]
+    },
+    "TrackMix": {
+      "description": "Track-level audio mix settings.",
+      "type": "object",
+      "properties": {
+        "pan": {
+          "description": "Stereo pan (-1.0 left to +1.0 right).",
+          "type": "number",
+          "format": "float",
+          "default": 0.0
+        },
+        "role": {
+          "description": "Role for ducking: \"voice\", \"music\", \"sfx\".",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "volume_db": {
+          "description": "Track gain adjustment in decibels (dB).",
+          "type": "number",
+          "format": "float",
+          "default": 0.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "Transition": {
+      "description": "Transition effect between clips.",
+      "type": "object",
+      "properties": {
+        "duration": {
+          "description": "Duration of transition.",
+          "$ref": "#/$defs/TimeDuration"
+        },
+        "type": {
+          "description": "Transition type (cross_dissolve, dip_to_black, dip_to_white, push, slide, wipe).",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "duration"
+      ]
+    },
+    "Vec2D": {
+      "description": "2D vector for coordinates.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number",
+              "format": "float"
+            },
+            "y": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    },
+    "VideoCodec": {
+      "description": "Output video codec.",
+      "type": "string",
+      "enum": [
+        "h264",
+        "hevc",
+        "prores",
+        "vp9",
+        "av1"
+      ]
+    }
+  }
+}
