@@ -1,6 +1,6 @@
 # Phase 6 Infrastructure & Queue Reality Report
 
-**Date:** 2026-10-15T14:50:31.065589+00:00  
+**Date:** 2026-10-15T15:01:01.432847+00:00  
 **Architecture:** PostgreSQL 16 Distributed Queue + `FOR UPDATE SKIP LOCKED`  
 **Evaluation:** 500 concurrent real-job simulation across 10 worker pods  
 **Status:** **100% PASS** (Zero lost jobs, priority lane precedence verified)  
@@ -11,9 +11,9 @@
 - **Total Concurrent Renders:** 500
   - **Priority Lane:** 100 jobs
   - **Standard Lane:** 400 jobs
-- **p50 Queue Latency:** **397.00 ms**
-- **p95 Queue Latency:** **504.00 ms** (Target: < 20,000 ms / 20 s) — **PASS**
-- **p99 Queue Latency:** **506.00 ms**
+- **p50 Queue Latency:** **416.00 ms**
+- **p95 Queue Latency:** **531.00 ms** (Target: < 20,000 ms / 20 s) — **PASS**
+- **p99 Queue Latency:** **531.00 ms**
 - **Priority Lane Dispatch:** 100% of priority jobs claimed ahead of standard jobs regardless of arrival time.
 
 ## 2. Distributed Locking & PostgreSQL Dialect

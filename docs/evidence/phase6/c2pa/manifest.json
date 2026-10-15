@@ -1,8 +1,8 @@
 {
   "claim_generator": "Cutline/0.1.0 (c2pa-rs)",
-  "title": "Render 2a1476fd-7339-4170-9b63-e52878f2d424",
+  "title": "Render 3f6d5fcb-2917-4d43-b508-77beb68da8c1",
   "format": "video/mp4",
-  "instance_id": "urn:uuid:01a14008-0cda-74a4-aa8b-2de6eaf746e5",
+  "instance_id": "urn:uuid:01a14014-a744-703b-8036-da3c310a7be6",
   "assertions": [
     {
       "label": "c2pa.actions",
@@ -10,12 +10,12 @@
         {
           "action": "c2pa.created",
           "software_agent": "Cutline Engine v0.1.0",
-          "when": "2026-10-15T14:47:11.834818Z"
+          "when": "2026-10-15T15:00:57.795767Z"
         },
         {
           "action": "c2pa.composited",
           "software_agent": "Cutline Headless Compositor",
-          "when": "2026-10-15T14:47:11.834818Z"
+          "when": "2026-10-15T15:00:57.795767Z"
         }
       ]
     },
@@ -30,7 +30,7 @@
       "label": "cutline.engine",
       "data": {
         "version": "0.1.0",
-        "render_id": "2a1476fd-7339-4170-9b63-e52878f2d424",
+        "render_id": "3f6d5fcb-2917-4d43-b508-77beb68da8c1",
         "timeline_hash": "680efc381434cb8b4aeef8562c698b1a73ed45a074ae7435379b4a8d5845e7a6"
       }
     }
@@ -38,15 +38,15 @@
   "signature": {
     "algorithm": "es256",
     "issuer": "Cutline CA (staging-rsa-key-1)",
-    "timestamp": "2026-10-15T14:47:11.834818Z",
-    "signature_hex": "63fae6a1f9d9bfdba54681c578d3d8445435efac9af085944393717e7286aa48",
+    "timestamp": "2026-10-15T15:00:57.795767Z",
+    "signature_hex": "27a9e58377824b68b8b661dac00db0c6d6f1c1028f36f2b40c3beff3048f9767",
     "certificate_chain": {
       "root_ca": {
         "subject": "CN=Cutline Staging Root CA, O=Cutline Technologies Inc, C=US",
         "issuer": "CN=Cutline Staging Root CA, O=Cutline Technologies Inc, C=US",
         "serial_number": "4a:71:09:bc:88:21:4f:01",
-        "not_before": "2026-10-15T14:47:11.834927Z",
-        "not_after": "2036-10-12T14:47:11.834927Z",
+        "not_before": "2026-10-15T15:00:57.796169Z",
+        "not_after": "2036-10-12T15:00:57.796169Z",
         "thumbprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "is_ca": true,
         "key_usage": [
@@ -58,8 +58,8 @@
         "subject": "CN=Cutline Content Credentials Issuing CA G1, O=Cutline Technologies Inc, C=US",
         "issuer": "CN=Cutline Staging Root CA, O=Cutline Technologies Inc, C=US",
         "serial_number": "5b:82:1a:cd:99:32:5e:02",
-        "not_before": "2026-10-15T14:47:11.834927Z",
-        "not_after": "2031-10-14T14:47:11.834927Z",
+        "not_before": "2026-10-15T15:00:57.796169Z",
+        "not_after": "2031-10-14T15:00:57.796169Z",
         "thumbprint_sha256": "1f82c2d96e5d83f12abf8417c912e7534d0b1a29f8c4e5d6a7b8c9d0e1f2a3b4",
         "is_ca": true,
         "key_usage": [
@@ -71,8 +71,8 @@
         "subject": "CN=Cutline Production Worker Node 01, O=Cutline Technologies Inc, C=US",
         "issuer": "CN=Cutline Content Credentials Issuing CA G1, O=Cutline Technologies Inc, C=US",
         "serial_number": "6c:93:2b:de:aa:43:6f:03",
-        "not_before": "2026-10-15T14:47:11.834927Z",
-        "not_after": "2027-10-15T14:47:11.834927Z",
+        "not_before": "2026-10-15T15:00:57.796169Z",
+        "not_after": "2027-10-15T15:00:57.796169Z",
         "thumbprint_sha256": "9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d",
         "is_ca": false,
         "key_usage": [

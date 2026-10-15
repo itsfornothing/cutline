@@ -11,9 +11,9 @@
     }
   ],
   "assets": {
-    "ocean": {
+    "bars": {
       "type": "video",
-      "src": "demo:ocean_sunset",
+      "src": "demo:bars",
       "loop": true,
       "duration": 5.0
     },
@@ -23,9 +23,9 @@
       "loop": true,
       "duration": 5.0
     },
-    "bars": {
+    "ocean": {
       "type": "video",
-      "src": "demo:bars",
+      "src": "demo:ocean_sunset",
       "loop": true,
       "duration": 5.0
     }

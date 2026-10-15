@@ -11,6 +11,12 @@
     }
   ],
   "assets": {
+    "aurora": {
+      "type": "video",
+      "src": "demo:aurora",
+      "loop": true,
+      "duration": 5.0
+    },
     "bars": {
       "type": "video",
       "src": "demo:bars",
@@ -20,12 +26,6 @@
     "ocean": {
       "type": "video",
       "src": "demo:ocean_sunset",
-      "loop": true,
-      "duration": 5.0
-    },
-    "aurora": {
-      "type": "video",
-      "src": "demo:aurora",
       "loop": true,
       "duration": 5.0
     }

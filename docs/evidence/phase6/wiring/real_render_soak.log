@@ -1,5 +1,5 @@
 === TICKET 6.1.0 REAL RENDER SOAK ===
 Jobs: 5
-Total Wall Time: 30.18s
-Avg Time Per Job: 6.04s
+Total Wall Time: 28.67s
+Avg Time Per Job: 5.73s
 Wiring Status: VERIFIED REAL (Wall time > 2.0s)

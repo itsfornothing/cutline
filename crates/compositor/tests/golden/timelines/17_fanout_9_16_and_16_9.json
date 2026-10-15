@@ -24,15 +24,15 @@
       "loop": true,
       "duration": 5.0
     },
-    "ocean": {
-      "type": "video",
-      "src": "demo:ocean_sunset",
-      "loop": true,
-      "duration": 5.0
-    },
     "bars": {
       "type": "video",
       "src": "demo:bars",
+      "loop": true,
+      "duration": 5.0
+    },
+    "ocean": {
+      "type": "video",
+      "src": "demo:ocean_sunset",
       "loop": true,
       "duration": 5.0
     }

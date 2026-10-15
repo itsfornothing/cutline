@@ -438,6 +438,7 @@ name = "cutline-captions"
 version = "0.1.0"
 dependencies = [
  "async-trait",
+ "chrono",
  "cutline-schema",
  "serde",
  "serde_json",
