@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-10-15T14:50:31.065589+00:00",
+  "total_jobs": 500,
+  "priority_lane_jobs": 100,
+  "standard_lane_jobs": 400,
+  "p50_queue_wait_ms": 397.0,
+  "p95_queue_wait_ms": 504.0,
+  "p99_queue_wait_ms": 506.0,
+  "crashed_workers_simulated": 5,
+  "recovered_jobs_reaped": 5,
+  "lost_jobs": 0,
+  "status": "PASS"
+}
