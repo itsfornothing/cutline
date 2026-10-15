@@ -1,0 +1,74 @@
+{
+  "run_id": "6b4e92c2-6855-4023-a4ef-a6f434adfa59",
+  "template": "E-baseline-10s",
+  "mode": "engine",
+  "git_sha": "a6bb6b5d72475e8a359cac1d19084ac3d04070e5",
+  "filmcraft_version": "filmcraft-cli 0.7.2",
+  "build_profile": "release+lto",
+  "env": {
+    "os": "macos",
+    "kernel": "25.6.0",
+    "cpu_model": "Apple M1",
+    "cores": 8,
+    "ram_gb": 8.0,
+    "gpu": {
+      "model": "Apple M1 Integrated GPU",
+      "driver": "Metal / Apple Silicon",
+      "cuda": null
+    },
+    "power_source": "battery",
+    "instance_type": "local"
+  },
+  "output": {
+    "path": "/var/folders/r_/5spkzt010d9557v1nm7j3pr00000gn/T/cutline_bench_6b4e92c2-6855-4023-a4ef-a6f434adfa59/output.mp4",
+    "duration_s": 10.005,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30.0,
+    "frames": 300,
+    "codec": "h264",
+    "encoder": "filmcraft 0.7.2",
+    "hw_encode": null,
+    "size_bytes": 587315,
+    "frame_hashes_sha256": "3ebe205a9d7db98f610a693ea32a385733141575a8ee2c4434b1601f9e315ed2"
+  },
+  "timing": {
+    "wall_total_s": 4.75,
+    "render_wall_s": 4.75,
+    "realtime_multiple": 2.11,
+    "stages": {
+      "fetch_s": 0.0,
+      "align_s": 0.0,
+      "composite_encode_s": 4.75,
+      "mux_s": 0.0
+    }
+  },
+  "frame_time_ms": {
+    "p50": null,
+    "p95": null,
+    "p99": null,
+    "source": "unavailable"
+  },
+  "memory": {
+    "peak_rss_tree_mb": 1254.58,
+    "peak_cgroup_mb": null,
+    "method": "libproc_taskinfo_recursive"
+  },
+  "cpu": {
+    "avg_util_pct": 658.2,
+    "peak_util_pct": 718.8
+  },
+  "gpu_util": {
+    "avg_pct": null,
+    "peak_pct": null,
+    "encoder_avg_pct": null,
+    "decoder_avg_pct": null,
+    "vram_peak_mb": null
+  },
+  "aligner": "rule_based",
+  "validity": {
+    "ffprobe_ok": true,
+    "duration_ok": true,
+    "errors": []
+  }
+}

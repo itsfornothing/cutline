@@ -174,8 +174,9 @@ export const MarketingView: React.FC<MarketingViewProps> = ({ onOpenStudio }) =>
               </div>
               <div className="text-3xl font-bold text-neutral-100">${cutlineTotalUsd.toFixed(2)}</div>
               <p className="text-[11px] text-neutral-400">
-                Fully managed NVENC GPU nodes, instant zero cold-start queue, word-level captions, fanout reframing, and C2PA signing included.
+                Native Rust compositor pipeline with zero cold-start queue, automated captions, fanout reframing, and C2PA provenance signing included.
               </p>
+
             </div>
 
             {/* Self-Hosted Browser Renderer Estimate */}

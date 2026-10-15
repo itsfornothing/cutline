@@ -83,7 +83,8 @@ export const UsageView: React.FC = () => {
         <div className="bg-panel-dark border border-white/8 rounded-lg p-4 space-y-1">
           <span className="text-[11px] font-mono text-neutral-500 uppercase">AVERAGE JOB TIME</span>
           <div className="text-2xl font-bold font-mono text-neutral-200">1.84s</div>
-          <span className="text-[10px] font-mono text-neutral-400">6.5× realtime speed</span>
+          <span className="text-[10px] font-mono text-neutral-400">1.9× local baseline speed</span>
+
         </div>
       </div>
 

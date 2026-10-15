@@ -11,15 +11,15 @@
     }
   ],
   "assets": {
-    "bars": {
-      "type": "video",
-      "src": "demo:bars",
-      "loop": true,
-      "duration": 5.0
-    },
     "aurora": {
       "type": "video",
       "src": "demo:aurora",
+      "loop": true,
+      "duration": 5.0
+    },
+    "bars": {
+      "type": "video",
+      "src": "demo:bars",
       "loop": true,
       "duration": 5.0
     },

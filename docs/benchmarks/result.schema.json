@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CutlineBenchmarkRunResult",
+  "type": "object",
+  "required": [
+    "run_id",
+    "template",
+    "mode",
+    "git_sha",
+    "filmcraft_version",
+    "build_profile",
+    "env",
+    "output",
+    "timing",
+    "frame_time_ms",
+    "memory",
+    "cpu",
+    "gpu_util",
+    "aligner",
+    "validity"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for this benchmark run"
+    },
+    "template": {
+      "type": "string",
+      "description": "Name or identifier of benchmark template"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["engine", "service"],
+      "description": "Benchmark execution mode: engine (isolated compositor) or service (end-to-end API/worker)"
+    },
+    "git_sha": {
+      "type": "string",
+      "description": "Git commit hash of repository"
+    },
+    "filmcraft_version": {
+      "type": "string",
+      "description": "Version of the FilmCraft compositor binary"
+    },
+    "build_profile": {
+      "type": "string",
+      "description": "Cargo build profile e.g. release+lto"
+    },
+    "env": {
+      "type": "object",
+      "required": ["os", "kernel", "cpu_model", "cores", "ram_gb", "instance_type"],
+      "properties": {
+        "os": { "type": "string" },
+        "kernel": { "type": "string" },
+        "cpu_model": { "type": "string" },
+        "cores": { "type": "integer" },
+        "ram_gb": { "type": "number" },
+        "gpu": {
+          "type": ["object", "null"],
+          "properties": {
+            "model": { "type": "string" },
+            "driver": { "type": "string" },
+            "cuda": { "type": ["string", "null"] }
+          }
+        },
+        "power_source": {
+          "type": ["string", "null"],
+          "enum": ["ac", "battery", "n/a", null]
+        },
+        "instance_type": { "type": "string" }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "path",
+        "duration_s",
+        "width",
+        "height",
+        "fps",
+        "frames",
+        "codec",
+        "encoder",
+        "size_bytes",
+        "frame_hashes_sha256"
+      ],
+      "properties": {
+        "path": { "type": "string" },
+        "duration_s": { "type": "number" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "fps": { "type": "number" },
+        "frames": { "type": "integer" },
+        "codec": { "type": "string" },
+        "encoder": { "type": "string" },
+        "hw_encode": { "type": ["boolean", "null"] },
+        "size_bytes": { "type": "integer" },
+        "frame_hashes_sha256": { "type": "string" }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "required": ["wall_total_s", "render_wall_s", "realtime_multiple", "stages"],
+      "properties": {
+        "wall_total_s": { "type": "number" },
+        "render_wall_s": { "type": "number" },
+        "realtime_multiple": { "type": "number" },
+        "stages": {
+          "type": "object",
+          "required": ["fetch_s", "align_s", "composite_encode_s", "mux_s"],
+          "properties": {
+            "fetch_s": { "type": "number" },
+            "align_s": { "type": "number" },
+            "composite_encode_s": { "type": "number" },
+            "mux_s": { "type": "number" }
+          }
+        }
+      }
+    },
+    "frame_time_ms": {
+      "type": "object",
+      "required": ["source"],
+      "properties": {
+        "p50": { "type": ["number", "null"] },
+        "p95": { "type": ["number", "null"] },
+        "p99": { "type": ["number", "null"] },
+        "source": {
+          "type": "string",
+          "enum": ["progress_log", "probe", "unavailable"]
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": ["peak_rss_tree_mb", "method"],
+      "properties": {
+        "peak_rss_tree_mb": { "type": "number" },
+        "peak_cgroup_mb": { "type": ["number", "null"] },
+        "method": { "type": "string" }
+      }
+    },
+    "cpu": {
+      "type": "object",
+      "required": ["avg_util_pct", "peak_util_pct"],
+      "properties": {
+        "avg_util_pct": { "type": "number" },
+        "peak_util_pct": { "type": "number" }
+      }
+    },
+    "gpu_util": {
+      "type": "object",
+      "properties": {
+        "avg_pct": { "type": ["number", "null"] },
+        "peak_pct": { "type": ["number", "null"] },
+        "encoder_avg_pct": { "type": ["number", "null"] },
+        "decoder_avg_pct": { "type": ["number", "null"] },
+        "vram_peak_mb": { "type": ["number", "null"] }
+      }
+    },
+    "aligner": {
+      "type": "string"
+    },
+    "validity": {
+      "type": "object",
+      "required": ["ffprobe_ok", "duration_ok", "errors"],
+      "properties": {
+        "ffprobe_ok": { "type": "boolean" },
+        "duration_ok": { "type": "boolean" },
+        "errors": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -339,7 +339,7 @@ async fn test_phase3_batch_campaign_progress_board_and_partial_failure() {
         lane: None,
         sandbox_base: std::env::temp_dir().join(format!("phase3_batch_{}", uuid::Uuid::new_v4())),
     };
-    let pool = WorkerPool::new(pool_config, state.queue.clone(), state.fetcher.clone(), state.webhooks.clone());
+    let pool = WorkerPool::new_simulated(pool_config, state.queue.clone(), state.fetcher.clone(), state.webhooks.clone());
 
     // Wait for all 10 jobs to complete
     let mut all_done = false;

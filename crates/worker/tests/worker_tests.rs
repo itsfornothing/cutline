@@ -4,6 +4,7 @@ use cutline_scheduler::{
 };
 use cutline_worker::{
     FetchError, FetcherConfig, JobRunner, SafeFetcher, WebhookDispatcher,
+};
 use std::sync::Arc;
 
 fn sample_timeline() -> Timeline {
