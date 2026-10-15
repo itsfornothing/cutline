@@ -1,0 +1,145 @@
+{
+  "timestamp": "2026-10-15T14:57:15.990829+00:00",
+  "openapi_spec_path": "docs/openapi.yaml",
+  "total_endpoints_checked": 15,
+  "matching_endpoints": 15,
+  "drift_detected": false,
+  "routes": [
+    {
+      "path": "/healthz",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/renders",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/renders/{id}",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/renders/{id}",
+      "method": "DELETE",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/renders/{id}/events",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/renders:validate",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/batches",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/batches/{id}",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/brand-kits",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/brand-kits/{id}",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/templates",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/templates/{id}",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/templates/{id}/golden",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/templates/{id}/ci-run",
+      "method": "POST",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    },
+    {
+      "path": "/v1/usage",
+      "method": "GET",
+      "in_openapi_spec": true,
+      "in_axum_router": true,
+      "in_ts_sdk": true,
+      "in_python_sdk": true,
+      "status": "MATCH"
+    }
+  ],
+  "overall_status": "PASS"
+}
