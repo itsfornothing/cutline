@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <!-- Safe Zone Background: TikTok 9:16 portrait canvas -->
+  <rect width="1080" height="1920" fill="#0A0A0A"/>
+  
+  <!-- Safe Zone Boundary -->
+  <rect x="86.4" y="192" width="799.2" height="1305.6" fill="none" stroke="#333333" stroke-dasharray="8,8" stroke-width="2"/>
+  
+  <!-- Subtitle Backdrop Box -->
+  <rect x="120" y="1450" width="840" height="220" rx="24" fill="#18181B" opacity="0.92" stroke="#27272A" stroke-width="2"/>
+  
+  <!-- Script and Language Badge -->
+  <g transform="translate(140, 1490)">
+    <rect width="180" height="36" rx="8" fill="#F59E0B" opacity="0.15"/>
+    <text x="90" y="24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#F59E0B" text-anchor="middle">Spanish (Latin)</text>
+  </g>
+
+  <!-- Rendered Caption Line -->
+  <text x="140" y="1580" 
+        font-family="Inter, Noto Sans, system-ui, sans-serif" 
+        font-size="44" 
+        font-weight="bold" 
+        fill="#FFFFFF" 
+        direction="ltr"
+        text-anchor="start">
+    El futuro del renderizado
+  </text>
+</svg>

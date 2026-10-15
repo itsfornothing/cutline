@@ -91,3 +91,40 @@ pub fn break_caption_lines(
 
     lines
 }
+
+/// Validates glyph availability for the chosen script and font, returning warnings if glyphs may be missing.
+pub fn validate_font_glyphs(text: &str, font: &str) -> Vec<String> {
+    let mut warnings = Vec::new();
+    let script = detect_script(text);
+    let font_lower = font.to_lowercase();
+
+    match script {
+        ScriptType::Arabic => {
+            if !font_lower.contains("arabic") && !font_lower.contains("amiri") && !font_lower.contains("noto") {
+                warnings.push(format!("Font '{}' lacks native Arabic glyphs and cursive shaping; fallback to 'Noto Sans Arabic' required.", font));
+            }
+        }
+        ScriptType::Devanagari => {
+            if !font_lower.contains("devanagari") && !font_lower.contains("noto") && !font_lower.contains("poppins") {
+                warnings.push(format!("Font '{}' lacks Devanagari conjunct shaping; fallback to 'Noto Sans Devanagari' required.", font));
+            }
+        }
+        ScriptType::Ethiopic => {
+            if !font_lower.contains("ethiopic") && !font_lower.contains("geez") && !font_lower.contains("noto") {
+                warnings.push(format!("Font '{}' lacks Ethiopic/Ge'ez glyph coverage; fallback to 'Noto Sans Ethiopic' required.", font));
+            }
+        }
+        ScriptType::Cjk => {
+            if !font_lower.contains("cjk") && !font_lower.contains("han") && !font_lower.contains("noto") && !font_lower.contains("sc") && !font_lower.contains("tc") && !font_lower.contains("jp") {
+                warnings.push(format!("Font '{}' lacks CJK ideographs; fallback to 'Noto Sans CJK SC' required.", font));
+            }
+        }
+        ScriptType::Hebrew => {
+            if !font_lower.contains("hebrew") && !font_lower.contains("noto") {
+                warnings.push(format!("Font '{}' lacks Hebrew glyph coverage; fallback to 'Noto Sans Hebrew' required.", font));
+            }
+        }
+        ScriptType::Latin => {}
+    }
+    warnings
+}

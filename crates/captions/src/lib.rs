@@ -6,7 +6,10 @@ pub mod safe_zone;
 pub mod shaping;
 pub mod styles;
 
-pub use alignment::{CaptionError, ForcedAligner, RuleBasedAligner, TranscriptSegment, WordTiming};
+pub use alignment::{
+    CaptionError, ForcedAligner, RuleBasedAligner, TranscriptSegment, WhisperSidecarAligner,
+    WordTiming,
+};
 pub use safe_zone::{get_safe_zone_margins, SafeZoneMargins, SafeZoneRect};
-pub use shaping::{break_caption_lines, detect_script, CaptionLine, ScriptType};
+pub use shaping::{break_caption_lines, detect_script, validate_font_glyphs, CaptionLine, ScriptType};
 pub use styles::{resolve_caption_at_time, ActiveCaptionState, StylePreset};
