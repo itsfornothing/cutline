@@ -52,6 +52,7 @@ pub struct C2paSignature {
     pub issuer: String,
     pub timestamp: DateTime<Utc>,
     pub signature_hex: String,
+    pub certificate_chain: Option<crate::cert::C2paCertificateChain>,
 }
 
 /// Root C2PA Content Credentials manifest structure.
@@ -127,6 +128,7 @@ impl C2paManifest {
             issuer: format!("Cutline CA ({signing_key_id})"),
             timestamp: now,
             signature_hex,
+            certificate_chain: Some(crate::cert::C2paCertificateChain::staging_pki()),
         };
 
         Self {
@@ -150,6 +152,12 @@ impl C2paManifest {
 
         if self.signature.signature_hex.is_empty() {
             return Ok(false);
+        }
+
+        if let Some(ref chain) = self.signature.certificate_chain {
+            if !chain.verify_trust_chain() {
+                return Ok(false);
+            }
         }
 
         Ok(true)
