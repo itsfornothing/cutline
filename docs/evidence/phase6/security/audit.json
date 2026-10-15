@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-10-15T14:55:14.039618+00:00",
+  "dns_pinning_active": true,
+  "ssrf_filter_active": true,
+  "redirect_cap_enforced": true,
+  "seccomp_profile_configured": true,
+  "network_policy_configured": true,
+  "fuzzing_resilience_passed": true,
+  "checks": [
+    {
+      "check_id": "ssrf-block-127.0.0.1",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP Loopback IPv4",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "ssrf-block-10.0.0.5",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP Private Class A (10.0.0.0/8)",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "ssrf-block-172.16.0.1",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP Private Class B (172.16.0.0/12)",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "ssrf-block-192.168.1.100",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP Private Class C (192.168.0.0/16)",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "ssrf-block-169.254.169.254",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP AWS IMDS / Link-local Metadata",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "ssrf-block-::1",
+      "category": "SSRF Protection",
+      "description": "Block internal/private IP Loopback IPv6 (::1)",
+      "status": "PASS",
+      "mitigation": "Strict subnet filtering in SafeFetcher::is_ip_blocked"
+    },
+    {
+      "check_id": "sec-dns-pinning",
+      "category": "Network Hardening",
+      "description": "DNS Pinning via resolve_and_validate eliminating DNS rebinding races",
+      "status": "PASS",
+      "mitigation": "reqwest::ClientBuilder::resolve pinning to verified socket address"
+    },
+    {
+      "check_id": "sec-fuzz-json",
+      "category": "Input Fuzzing",
+      "description": "Schema parser resilience against malformed & malicious JSON payloads",
+      "status": "PASS",
+      "mitigation": "Strict serde & schemars validation without panic"
+    },
+    {
+      "check_id": "sec-seccomp-profile",
+      "category": "Container Isolation",
+      "description": "Worker seccomp profile dropping dangerous syscalls (ptrace, bpf, reboot)",
+      "status": "PASS",
+      "mitigation": "infra/security/seccomp-profile.json configured"
+    },
+    {
+      "check_id": "sec-k8s-netpol",
+      "category": "Container Isolation",
+      "description": "Kubernetes NetworkPolicy blocking unauthorized worker pod egress",
+      "status": "PASS",
+      "mitigation": "infra/security/network-policy.yaml isolating worker pods"
+    }
+  ],
+  "overall_status": "PASS"
+}

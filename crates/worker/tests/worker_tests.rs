@@ -87,6 +87,14 @@ async fn test_ssrf_blocks_private_and_reserved_ips() {
         fetcher.validate_url("gopher://evil.com/").await,
         Err(FetchError::BlockedProtocol(_))
     ));
+
+    // DNS Pinning verification: resolves to pinned socket address
+    let (_url, host, addr) = fetcher.resolve_and_validate("https://93.184.216.34/asset.mp4").await.unwrap();
+    assert_eq!(host, "93.184.216.34");
+    assert!(!fetcher.is_ip_blocked(addr.ip()));
+    assert_eq!(addr.port(), 443);
+    let client = fetcher.build_pinned_client(&host, addr);
+    assert!(client.is_ok(), "Pinned client must construct with resolved socket addr");
 }
 
 #[test]

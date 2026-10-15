@@ -60,6 +60,7 @@ impl Default for FetcherConfig {
 #[derive(Clone)]
 pub struct SafeFetcher {
     config: FetcherConfig,
+    #[allow(dead_code)]
     client: reqwest::Client,
 }
 
@@ -74,6 +75,15 @@ impl SafeFetcher {
 
         Self { config, client }
     }
+}
+
+impl Default for SafeFetcher {
+    fn default() -> Self {
+        Self::new(FetcherConfig::default())
+    }
+}
+
+impl SafeFetcher {
 
     /// Validates whether an IP address is private, loopback, link-local, or reserved.
     pub fn is_ip_blocked(&self, ip: IpAddr) -> bool {
@@ -153,8 +163,9 @@ impl SafeFetcher {
         }
     }
 
-    /// Validates a URL and all resolved IP addresses against SSRF rules.
-    pub async fn validate_url(&self, target_url: &str) -> Result<Url, FetchError> {
+    /// Validates a URL and all resolved IP addresses against SSRF rules,
+    /// returning the parsed URL, validated host string, and pinned SocketAddr.
+    pub async fn resolve_and_validate(&self, target_url: &str) -> Result<(Url, String, std::net::SocketAddr), FetchError> {
         let parsed = Url::parse(target_url).map_err(|e| FetchError::InvalidUrl(e.to_string()))?;
 
         // Scheme check: only http and https allowed
@@ -165,49 +176,69 @@ impl SafeFetcher {
 
         let host = parsed
             .host_str()
-            .ok_or_else(|| FetchError::InvalidUrl("Missing host in URL".to_string()))?;
+            .ok_or_else(|| FetchError::InvalidUrl("Missing host in URL".to_string()))?
+            .to_string();
+
+        let port = parsed.port_or_known_default().unwrap_or(if scheme == "https" { 443 } else { 80 });
 
         // Direct IP check or DNS resolution
-        if let Ok(ip) = host.parse::<IpAddr>() {
+        let socket_addr = if let Ok(ip) = host.parse::<IpAddr>() {
             if self.is_ip_blocked(ip) {
                 return Err(FetchError::BlockedIp(ip));
             }
+            std::net::SocketAddr::new(ip, port)
         } else {
             // Resolve host through DNS
-            let port = parsed.port_or_known_default().unwrap_or(80);
             let addr_str = format!("{}:{}", host, port);
             let addrs = tokio::net::lookup_host(&addr_str)
                 .await
-                .map_err(|e| FetchError::DnsResolutionFailed(host.to_string(), e.to_string()))?;
+                .map_err(|e| FetchError::DnsResolutionFailed(host.clone(), e.to_string()))?;
 
-            let mut resolved_any = false;
+            let mut chosen = None;
             for addr in addrs {
-                resolved_any = true;
                 if self.is_ip_blocked(addr.ip()) {
                     return Err(FetchError::BlockedIp(addr.ip()));
                 }
+                if chosen.is_none() {
+                    chosen = Some(addr);
+                }
             }
 
-            if !resolved_any {
-                return Err(FetchError::DnsResolutionFailed(
-                    host.to_string(),
-                    "No IP addresses resolved".to_string(),
-                ));
-            }
-        }
+            chosen.ok_or_else(|| {
+                FetchError::DnsResolutionFailed(host.clone(), "No IP addresses resolved".to_string())
+            })?
+        };
 
-        Ok(parsed)
+        Ok((parsed, host, socket_addr))
+    }
+
+    /// Validates a URL and all resolved IP addresses against SSRF rules.
+    pub async fn validate_url(&self, target_url: &str) -> Result<Url, FetchError> {
+        let (url, _, _) = self.resolve_and_validate(target_url).await?;
+        Ok(url)
+    }
+
+    /// Builds a pinned reqwest client that connects directly to the validated socket address for host.
+    pub fn build_pinned_client(&self, host: &str, addr: std::net::SocketAddr) -> Result<reqwest::Client, FetchError> {
+        reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .connect_timeout(self.config.connect_timeout)
+            .timeout(self.config.request_timeout)
+            .resolve(host, addr)
+            .build()
+            .map_err(|e| FetchError::HttpError(e.to_string()))
     }
 
     /// Fetches an asset from a URL into the specified destination file path.
-    /// Safely handles redirects and validates every redirect target against SSRF.
+    /// Safely handles redirects, pins DNS to pre-validated socket addresses,
+    /// and enforces maximum download limits.
     pub async fn fetch_to_file(&self, url_str: &str, dest_path: &Path) -> Result<u64, FetchError> {
-        let mut current_url = self.validate_url(url_str).await?;
+        let (mut current_url, mut current_host, mut current_addr) = self.resolve_and_validate(url_str).await?;
         let mut redirects_followed = 0;
 
         let response = loop {
-            let res = self
-                .client
+            let client = self.build_pinned_client(&current_host, current_addr)?;
+            let res = client
                 .get(current_url.as_str())
                 .send()
                 .await
@@ -232,9 +263,11 @@ impl SafeFetcher {
                     .join(loc)
                     .map_err(|e| FetchError::InvalidUrl(e.to_string()))?;
 
-                // Validate new destination against SSRF!
-                self.validate_url(next_url.as_str()).await?;
-                current_url = next_url;
+                // Validate new destination and pin its IP
+                let (v_url, v_host, v_addr) = self.resolve_and_validate(next_url.as_str()).await?;
+                current_url = v_url;
+                current_host = v_host;
+                current_addr = v_addr;
                 continue;
             }
 
