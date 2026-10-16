@@ -1,0 +1,7 @@
+1
+00:00:00,500 --> 00:00:06,000
+Twelve rows, twelve videos, one report.
+
+2
+00:00:06,500 --> 00:00:14,500
+Scale programmatic video campaigns with idempotent batching. Failures are itemized, never silent.

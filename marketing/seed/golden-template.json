@@ -1,0 +1,13 @@
+{
+  "tenant_id": "tenant_prod_cutline",
+  "id": "tpl_verified_promo",
+  "name": "Verified Promotional Template v1",
+  "golden_timestamps": [0.5, 2.0, 5.0],
+  "pinned_hashes": {
+    "0.5": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "2.0": "d41d8cd98f00b204e9800998ecf8427e1f82c2d96e5d83f12abf8417c912e753",
+    "5.0": "9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d"
+  },
+  "created_at": "2026-10-14T10:00:00Z",
+  "updated_at": "2026-10-15T12:00:00Z"
+}

@@ -1,0 +1,26 @@
+{
+  "tenant_id": "tenant_prod_cutline",
+  "brand_id": "cutline_amber",
+  "name": "Cutline Dark & Amber",
+  "colors": {
+    "primary": "#0A0A0A",
+    "accent": "#F59E0B",
+    "text": "#FAFAFA",
+    "muted": "#71717A"
+  },
+  "typography": {
+    "heading": "Geist",
+    "body": "Inter",
+    "monospace": "Geist Mono"
+  },
+  "logo": {
+    "url": "https://cdn.cutline.dev/assets/cutline_logo_amber.png",
+    "position": "top-right",
+    "width": 140
+  },
+  "bumper": {
+    "intro_url": null,
+    "outro_url": "https://cdn.cutline.dev/assets/outro_bumper_2s.mp4",
+    "duration_seconds": 2.0
+  }
+}

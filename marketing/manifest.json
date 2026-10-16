@@ -1,0 +1,363 @@
+{
+  "engine": "Cutline v1.0.0",
+  "git_commit": "027c08097faee235fa6b53e04710445478f77c5b",
+  "timestamp": "2026-10-16T08:12:24Z",
+  "audio_compliance": {
+    "standard": "ITU-R BS.1770-4 / EBU R128",
+    "integrated_lufs": -14.1,
+    "target_lufs": -14.0,
+    "tolerance_lu": 1.0,
+    "true_peak_dbtp": -1.0,
+    "status": "PASS"
+  },
+  "skipped_scenes_recorded": "marketing/skipped-scenes.md",
+  "legal_licenses_recorded": "marketing/LICENSES.md",
+  "deliverables_count": 25,
+  "deliverables": [
+    {
+      "path": "marketing/renders/hero_90s.mp4",
+      "type": "hero",
+      "sha256": "da12337c1056717a8972c6d40e51da3aee8b0ae36a7fa0139f74f1b7d89cae2e",
+      "size_bytes": 3720730,
+      "duration_seconds": 90.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "quote-formula",
+        "validate-dry-run",
+        "studio-editing",
+        "fanout-3-formats",
+        "audio-lufs-ducking",
+        "observatory-waterfall",
+        "template-ci-golden",
+        "pricing-published"
+      ]
+    },
+    {
+      "path": "marketing/renders/hero_90s_av1.mp4",
+      "type": "hero_av1",
+      "sha256": "23ba297cfa746ce096097b204e23a7053b06413eec560e1b77832b59e42d9bc1",
+      "size_bytes": 2063768,
+      "duration_seconds": 90.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "quote-formula",
+        "validate-dry-run",
+        "studio-editing",
+        "fanout-3-formats",
+        "audio-lufs-ducking",
+        "observatory-waterfall",
+        "template-ci-golden",
+        "pricing-published"
+      ]
+    },
+    {
+      "path": "marketing/renders/walkthrough_5min.mp4",
+      "type": "walkthrough",
+      "sha256": "7e7350174367717551cec8aca8a90ea7f49a3ba8ca4e39863271e41b7cea082c",
+      "size_bytes": 11656194,
+      "duration_seconds": 280.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "quote-formula",
+        "validate-dry-run",
+        "studio-editing",
+        "fanout-3-formats",
+        "audio-lufs-ducking",
+        "observatory-waterfall",
+        "template-ci-golden",
+        "batch-campaign",
+        "brand-kits",
+        "api-sdk",
+        "usage-billing-testmode",
+        "keyboard-first",
+        "pricing-published"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_validate.mp4",
+      "type": "feature",
+      "sha256": "368901a9208afdaa3985b65e7919393b668e1f8e146b162d4bb06867d3a236df",
+      "size_bytes": 498076,
+      "duration_seconds": 20.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "validate-dry-run"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_studio.mp4",
+      "type": "feature",
+      "sha256": "20e134700851c1818bc740c2166fef7f98d13a2ca23aa1300dbbf8e83e821f49",
+      "size_bytes": 596643,
+      "duration_seconds": 24.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "studio-editing"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_fanout.mp4",
+      "type": "feature",
+      "sha256": "01f1550c9275ba68d8c8e47057f4870867b418976fbd2e1eb0ad5779a4f59a81",
+      "size_bytes": 424705,
+      "duration_seconds": 20.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "fanout-3-formats"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_audio.mp4",
+      "type": "feature",
+      "sha256": "c323f9a24f4f6cf4a1c331c9fac1c304a20b1c6fe3b27d6933cdb2362247f3e4",
+      "size_bytes": 525575,
+      "duration_seconds": 20.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "audio-lufs-ducking"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_observatory.mp4",
+      "type": "feature",
+      "sha256": "b90504b806303bc0d3c587f49e5851d19db84292666cc8551b4db2326c9788af",
+      "size_bytes": 568551,
+      "duration_seconds": 22.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "observatory-waterfall"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_template_ci.mp4",
+      "type": "feature",
+      "sha256": "dea3f0b212ca71cbc2375ee34ac0c7ee395119ce9ad1349930eff72439a32db9",
+      "size_bytes": 824766,
+      "duration_seconds": 24.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "template-ci-golden"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_batch.mp4",
+      "type": "feature",
+      "sha256": "672d1c6c54f7b45e15d7ceeebaf8210b748e94d714ba058b21bd885cf8da5279",
+      "size_bytes": 523896,
+      "duration_seconds": 20.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "batch-campaign"
+      ]
+    },
+    {
+      "path": "marketing/renders/feature_api_sdk.mp4",
+      "type": "feature",
+      "sha256": "c94270174de3bce0738979e3e734c0970acb06c918c3d93c1f336467bc7aeb2c",
+      "size_bytes": 597123,
+      "duration_seconds": 22.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "api-sdk"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_fanout_9x16.mp4",
+      "type": "social_9x16",
+      "sha256": "974dad3d33ae0df1a2b571787990a6de6a9f254e6b8cb3136824719ccec74422",
+      "size_bytes": 303407,
+      "duration_seconds": 15.0,
+      "resolution": "1080x1920",
+      "fps": 60.0,
+      "backed_claims": [
+        "fanout-3-formats"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_fanout_1x1.mp4",
+      "type": "social_1x1",
+      "sha256": "8e485b3dfc8c2539db6b22a67f73b99199dbeb3921d9358d5b8d41e75f52e452",
+      "size_bytes": 265823,
+      "duration_seconds": 15.0,
+      "resolution": "1080x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "fanout-3-formats"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_fanout_16x9.mp4",
+      "type": "social_16x9",
+      "sha256": "822a9b26c775a8549e827da994ef7a8303bcb4e2de033daec1611d61777540cf",
+      "size_bytes": 357387,
+      "duration_seconds": 15.0,
+      "resolution": "1920x1080",
+      "fps": 60.0,
+      "backed_claims": [
+        "fanout-3-formats"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_dryrun_9x16.mp4",
+      "type": "social_9x16",
+      "sha256": "ee63dfb0e43d299d9f9043585f01eac2d4c0677c8d390645dc61536e548c2b84",
+      "size_bytes": 514647,
+      "duration_seconds": 15.0,
+      "resolution": "1080x1920",
+      "fps": 60.0,
+      "backed_claims": [
+        "validate-dry-run"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_ci_9x16.mp4",
+      "type": "social_9x16",
+      "sha256": "f45fea1f68898c647aafd33379b8ceb698cbb17b49706a77cc8df1efaa2b95e2",
+      "size_bytes": 970367,
+      "duration_seconds": 15.0,
+      "resolution": "1080x1920",
+      "fps": 60.0,
+      "backed_claims": [
+        "template-ci-golden"
+      ]
+    },
+    {
+      "path": "marketing/renders/social_batch_9x16.mp4",
+      "type": "social_9x16",
+      "sha256": "982531a99ce2f748d0d6f4a4c4e95c5a3df9896e057625c89b4c82814c422705",
+      "size_bytes": 376065,
+      "duration_seconds": 15.0,
+      "resolution": "1080x1920",
+      "fps": 60.0,
+      "backed_claims": [
+        "batch-campaign"
+      ]
+    },
+    {
+      "path": "marketing/thumbnails/s01_hero.png",
+      "type": "thumbnail",
+      "sha256": "cc241d1c9eef310fe516b94b5d5299b9c0ace555ab041862cb9b7c632d04c264",
+      "size_bytes": 145002,
+      "duration_seconds": 0.0,
+      "resolution": "1920x1080",
+      "fps": 25.0,
+      "backed_claims": [
+        "quote-formula"
+      ]
+    },
+    {
+      "path": "marketing/thumbnails/s08_template_ci.png",
+      "type": "thumbnail",
+      "sha256": "22e22a8c853029f5cab8f63a44a7e865d0836a5de23ff3da2e944570d7a0bcf8",
+      "size_bytes": 149030,
+      "duration_seconds": 0.0,
+      "resolution": "1920x1080",
+      "fps": 25.0,
+      "backed_claims": [
+        "template-ci-golden"
+      ]
+    },
+    {
+      "path": "marketing/captions/hero_90s.srt",
+      "type": "caption",
+      "sha256": "e3d38bf5f05531f153435ead945d40fc1fddf371b703837267d06e4550d78a3c",
+      "size_bytes": 1150,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "quote-formula",
+        "validate-dry-run",
+        "studio-editing",
+        "fanout-3-formats",
+        "audio-lufs-ducking",
+        "observatory-waterfall",
+        "template-ci-golden",
+        "pricing-published"
+      ]
+    },
+    {
+      "path": "marketing/captions/walkthrough_5min.srt",
+      "type": "caption",
+      "sha256": "9e95a2cbfbfe4f4c1dbb9c035502f0006f9e7e265fc9691f9700e1afb8e0696e",
+      "size_bytes": 2073,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "quote-formula",
+        "validate-dry-run",
+        "studio-editing",
+        "fanout-3-formats",
+        "audio-lufs-ducking",
+        "observatory-waterfall",
+        "template-ci-golden",
+        "batch-campaign",
+        "brand-kits",
+        "api-sdk",
+        "usage-billing-testmode",
+        "keyboard-first",
+        "pricing-published"
+      ]
+    },
+    {
+      "path": "marketing/captions/social_fanout.srt",
+      "type": "caption",
+      "sha256": "0a0d5447dbc7ce7099b829f7190b5435df9c060b705804ea08425587ad04390d",
+      "size_bytes": 198,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "fanout-3-formats"
+      ]
+    },
+    {
+      "path": "marketing/captions/social_dryrun.srt",
+      "type": "caption",
+      "sha256": "f8d3c83ab569a3fdfce0c4d24ce47e68a95a187a3535b80d2012aebdfa364230",
+      "size_bytes": 224,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "validate-dry-run"
+      ]
+    },
+    {
+      "path": "marketing/captions/social_ci.srt",
+      "type": "caption",
+      "sha256": "aaeb691baf73ef0011ad3a7df4ab608b1a17aade7aafc4b4a3fab85273750784",
+      "size_bytes": 193,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "template-ci-golden"
+      ]
+    },
+    {
+      "path": "marketing/captions/social_batch.srt",
+      "type": "caption",
+      "sha256": "4cde440ec938c4271917155184be77b7821f2e3df9252eb72669f981806ae550",
+      "size_bytes": 203,
+      "duration_seconds": null,
+      "resolution": null,
+      "fps": null,
+      "backed_claims": [
+        "batch-campaign"
+      ]
+    }
+  ]
+}

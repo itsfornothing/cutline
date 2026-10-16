@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "variables": {
+    "customer_name": "Jordan",
+    "discount_code": "VIP30",
+    "discount_pct": "30%",
+    "brand_color": "#F59E0B"
+  },
+  "outputs": [
+    {
+      "id": "promo_story_9x16",
+      "aspect": "9:16",
+      "resolution": "1080x1920",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    },
+    {
+      "id": "promo_feed_1x1",
+      "aspect": "1x1",
+      "resolution": "1080x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    },
+    {
+      "id": "promo_wide_16x9",
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "canvas_bg": {
+      "type": "color",
+      "color": "#111827",
+      "duration": 10.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "track_bg",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "clip_bg",
+          "asset": "canvas_bg",
+          "start": 0.0,
+          "duration": 10.0,
+          "fit": "cover"
+        }
+      ]
+    },
+    {
+      "id": "track_message",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "clip_greeting",
+          "text": "Exclusive reward for {{customer_name}}",
+          "font": "Inter",
+          "font_size": 42,
+          "color": "#E5E7EB",
+          "start": 0.5,
+          "duration": 9.0,
+          "x": 80,
+          "y": 420
+        },
+        {
+          "id": "clip_promo",
+          "text": "SAVE {{discount_pct}} WITH CODE {{discount_code}}",
+          "font": "Geist Mono",
+          "font_size": 46,
+          "color": "{{brand_color}}",
+          "start": 0.5,
+          "duration": 9.0,
+          "x": 80,
+          "y": 500
+        }
+      ]
+    }
+  ]
+}

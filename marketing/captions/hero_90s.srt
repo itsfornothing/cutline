@@ -1,0 +1,39 @@
+1
+00:00:00,500 --> 00:00:06,000
+You're paying for renders that fail, previews that lie, and three jobs for three aspect ratios.
+
+2
+00:00:08,200 --> 00:00:14,250
+This is a video, described as JSON. The price is calculated before you render, every time.
+
+3
+00:00:18,200 --> 00:00:25,200
+Before spending anything, Cutline tells you what will break. Missing glyphs, dead asset URLs, wrong durations.
+
+4
+00:00:28,500 --> 00:00:33,400
+Edit visually or in JSON. Same document, both ways, with full undo.
+
+5
+00:00:40,200 --> 00:00:45,300
+One job, three formats, one invoice line. No more paying three times.
+
+6
+00:00:50,200 --> 00:00:54,900
+Auto-ducking and loudness normalization are built in, measured on the exported file.
+
+7
+00:00:58,200 --> 00:01:02,750
+Every render is a trace. You see where time and money went, down to the stage.
+
+8
+00:01:08,200 --> 00:01:13,200
+Templates have regressions too. Pin frames, catch the change before customers do.
+
+9
+00:01:18,500 --> 00:01:22,550
+Start free. Pay per rendered minute. Check the price before you render.
+
+10
+00:01:25,500 --> 00:01:29,800
+Cutline. Headless video rendering API. Ten free minutes. No card.

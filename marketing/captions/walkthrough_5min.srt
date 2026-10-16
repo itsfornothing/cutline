@@ -1,0 +1,59 @@
+1
+00:00:02,000 --> 00:00:09,500
+Welcome to Cutline. This is a complete walkthrough of our headless video rendering engine.
+
+2
+00:00:10,200 --> 00:00:17,200
+Every video is described as a declarative JSON timeline. The price is calculated before you render, every time.
+
+3
+00:00:22,000 --> 00:00:30,000
+Before spending anything, Cutline tells you what will break: missing glyphs, dead asset URLs, wrong durations.
+
+4
+00:00:44,000 --> 00:00:52,000
+In Studio, edit visually or in JSON. The same document is updated both ways, with full undo support.
+
+5
+00:01:10,000 --> 00:01:18,500
+With multi-format fan-out, one job outputs nine by sixteen, one by one, and sixteen by nine on a single invoice line.
+
+6
+00:01:32,000 --> 00:01:40,000
+Auto-ducking and loudness normalization are built in, measured directly on the exported media file.
+
+7
+00:01:52,000 --> 00:02:02,000
+In the Observatory, every render is an execution trace. You see where time and money went, down to the millisecond stage.
+
+8
+00:02:17,000 --> 00:02:27,000
+Templates have regressions too. Pin golden frames in CI, and catch visual regressions before your customers do.
+
+9
+00:02:47,000 --> 00:02:56,000
+Run batch campaigns with CSV uploads. Failures are itemized with clear error codes, never silently dropped.
+
+10
+00:03:12,000 --> 00:03:22,000
+Switch brand kits in a single call. Typography, color tokens, logos, and bumper clips adapt instantly.
+
+11
+00:03:32,000 --> 00:03:42,000
+Integrate via our idempotent REST API and SDKs. Stream progress via SSE and verify signed webhook payloads.
+
+12
+00:03:57,000 --> 00:04:08,000
+Track usage down to the second. Test mode ensures safe verification before launch, with real-time spend alerts.
+
+13
+00:04:22,000 --> 00:04:32,000
+Built for speed. The entire interface is keyboard-first, with instant navigation via command K.
+
+14
+00:04:42,000 --> 00:04:52,000
+Transparent pricing. Start free, pay strictly per rendered minute, and verify the cost before every render.
+
+15
+00:05:01,000 --> 00:05:08,000
+Get started at cutline.dev. Ten free minutes, no credit card required.

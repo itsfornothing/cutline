@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "variables": {
+    "title": "My coworkers thought I was crazy, until Cutline launched",
+    "author": "u/DevEngineer",
+    "upvotes": "14.2k",
+    "fps": 30
+  },
+  "outputs": [
+    {
+      "id": "reddit_vertical",
+      "aspect": "9:16",
+      "resolution": "1080x1920",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "bg_loop": {
+      "type": "color",
+      "color": "#0B0F19",
+      "duration": 15.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "track_bg",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "clip_bg",
+          "asset": "bg_loop",
+          "start": 0.0,
+          "duration": 15.0,
+          "fit": "cover"
+        }
+      ]
+    },
+    {
+      "id": "track_title_card",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "clip_author",
+          "text": "{{author}} • 4h ago",
+          "font": "Inter",
+          "font_size": 32,
+          "color": "#94A3B8",
+          "start": 0.0,
+          "duration": 15.0,
+          "x": 120,
+          "y": 680
+        },
+        {
+          "id": "clip_headline",
+          "text": "{{title}}",
+          "font": "Inter",
+          "font_size": 48,
+          "color": "#FFFFFF",
+          "start": 0.0,
+          "duration": 15.0,
+          "x": 120,
+          "y": 760,
+          "max_width": 840
+        }
+      ]
+    }
+  ]
+}

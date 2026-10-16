@@ -1,0 +1,7 @@
+1
+00:00:00,500 --> 00:00:06,000
+Catch video rendering bugs before you spend a single cent.
+
+2
+00:00:06,500 --> 00:00:14,500
+Cutline dry-run validation catches missing glyphs, dead URLs, and invalid timings before rendering.

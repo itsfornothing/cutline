@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "variables": {
+    "property_address": "742 Evergreen Terrace",
+    "price": "$1,250,000",
+    "sqft": "3,400 sq ft",
+    "agent_name": "Elena Vance",
+    "agent_phone": "555-0199"
+  },
+  "outputs": [
+    {
+      "id": "tour_landscape",
+      "aspect": "16:9",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264"
+    }
+  ],
+  "assets": {
+    "exterior": {
+      "type": "color",
+      "color": "#1E293B",
+      "duration": 5.0
+    },
+    "interior": {
+      "type": "color",
+      "color": "#0F172A",
+      "duration": 5.0
+    }
+  },
+  "tracks": [
+    {
+      "id": "track_slides",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "slide_ext",
+          "asset": "exterior",
+          "start": 0.0,
+          "duration": 5.0
+        },
+        {
+          "id": "slide_int",
+          "asset": "interior",
+          "start": 5.0,
+          "duration": 5.0
+        }
+      ]
+    },
+    {
+      "id": "track_lower_third",
+      "kind": "text",
+      "clips": [
+        {
+          "id": "text_addr",
+          "text": "{{property_address}}",
+          "font": "Geist",
+          "font_size": 44,
+          "color": "#FFFFFF",
+          "start": 0.5,
+          "duration": 9.0,
+          "x": 100,
+          "y": 880
+        },
+        {
+          "id": "text_price",
+          "text": "{{price}} • {{sqft}}",
+          "font": "Geist",
+          "font_size": 32,
+          "color": "#F59E0B",
+          "start": 0.5,
+          "duration": 9.0,
+          "x": 100,
+          "y": 940
+        }
+      ]
+    }
+  ]
+}

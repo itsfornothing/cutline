@@ -1,0 +1,7 @@
+1
+00:00:00,500 --> 00:00:06,000
+Stop paying three times for three aspect ratios.
+
+2
+00:00:06,500 --> 00:00:14,500
+Cutline renders 9:16, 1:1, and 16:9 in one single job. One trace, one invoice line.

@@ -1,0 +1,7 @@
+1
+00:00:00,500 --> 00:00:06,000
+Templates have regressions too.
+
+2
+00:00:06,500 --> 00:00:14,500
+Pin golden frames with SSIM visual diffing in CI. Catch template regressions before production.
