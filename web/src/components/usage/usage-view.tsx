@@ -8,10 +8,13 @@ import {
   CreditCard,
   DollarSign,
   ArrowUpRight,
+  Sparkles,
 } from 'lucide-react';
+import { CheckoutModal } from '../billing/checkout-modal';
 
 export const UsageView: React.FC = () => {
   const [downloadToast, setDownloadToast] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const handleExportCsv = (tableName: string) => {
     setDownloadToast(true);
@@ -45,14 +48,25 @@ export const UsageView: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={() => handleExportCsv('all_usage')}
-          className="px-3 py-1.5 rounded bg-white/6 hover:bg-white/10 text-neutral-200 border border-white/10 font-mono text-xs flex items-center gap-1.5 transition-colors"
-        >
-          <Download className="w-3.5 h-3.5" />
-          <span>Export Full Ledger CSV</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsCheckoutOpen(true)}
+            className="px-3 py-1.5 rounded bg-amber-safelight/15 hover:bg-amber-safelight/25 text-amber-safelight border border-amber-safelight/40 font-mono text-xs flex items-center gap-1.5 transition-colors font-bold"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Manage Plan / Checkout</span>
+          </button>
+          <button
+            onClick={() => handleExportCsv('all_usage')}
+            className="px-3 py-1.5 rounded bg-white/6 hover:bg-white/10 text-neutral-200 border border-white/10 font-mono text-xs flex items-center gap-1.5 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Export Full Ledger CSV</span>
+          </button>
+        </div>
       </div>
+
+      <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} defaultTier="growth" />
 
       {downloadToast && (
         <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono rounded">
